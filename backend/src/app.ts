@@ -21,9 +21,11 @@ const app = express();
 app.use(express.json());
 
 //Routes import
-import apiRoutes from './routes/apiRoutes';
-
+import apiRoutes from './routes/api.routes';
 app.use('/api/', apiRoutes);
+
+//Models import
+import { programmingLanguage, project } from './models/models';
 
 //Add Frontend Build
 //app.use('/', express.static(path.join(path.resolve(), '../frontend/dist')));
@@ -37,8 +39,12 @@ app.use('/api/', apiRoutes);
         await sequelize.authenticate();
         log.info('Connection has been established successfully to MySQL.');
 
+        // Establish relations
+        programmingLanguage.belongsToMany(project, { through: 'programmingLanguageProject' });
+        project.belongsToMany(programmingLanguage, { through: 'programmingLanguageProject' });
+
         // Sync models
-        //await sequelize.sync({ alter: true });
+        await sequelize.sync({ alter: true });
 
         app.listen(port, () => {
             log.info(
