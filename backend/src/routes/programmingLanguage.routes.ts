@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* TEMPORARY FIX ABOVE! */
-
 //External Dependencies Import
 import { Request, Response, Router } from 'express';
+
+//Local Dependencies Import
 import { programmingLanguage } from '../models/models';
 
 //Variable Declarations
@@ -81,10 +80,10 @@ router.put('/', async (req: Request, res: Response) => {
         });
     }
 
-    if (!req.body.programmingLanguageName && !req.body.programmingLanguageIcon && !req.body.programmingLanguageURL) {
+    if (!req.body.programmingLanguageName || !req.body.programmingLanguageIcon || !req.body.programmingLanguageURL) {
         return res.status(400).json({
             success: false,
-            error: 'Please provide a valid programmingLanguageName, programmingLanguageIcon and programmingLanguageURL.',
+            error: 'Please provide a valid programmingLanguageName, programmingLanguageIcon or programmingLanguageURL.',
         });
     }
 
@@ -117,7 +116,7 @@ router.put('/', async (req: Request, res: Response) => {
 /**
  * @api {delete} /api/language/ Delete a language
  */
-router.delete('/', async (req, res) => {
+router.delete('/', async (req: Request, res: Response) => {
     if (!req.body.programmingLanguageID) {
         return res.status(400).json({
             success: false,
