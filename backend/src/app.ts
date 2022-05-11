@@ -25,7 +25,7 @@ import apiRoutes from './routes/api.routes';
 app.use('/api/', apiRoutes);
 
 //Models import
-import { programmingLanguage, project } from './models/models';
+import { programmingLanguage, project, projectImages } from './models/models';
 
 //Add Frontend Build
 //app.use('/', express.static(path.join(path.resolve(), '../frontend/dist')));
@@ -41,7 +41,10 @@ import { programmingLanguage, project } from './models/models';
 
         // Establish relations
         programmingLanguage.belongsToMany(project, { through: 'programmingLanguageProject' });
-        project.belongsToMany(programmingLanguage, { through: 'programmingLanguageProject' });
+        project.hasMany(programmingLanguage, { through: 'programmingLanguageProject' });
+
+        projectImages.belongsTo(project, { foreignKey: 'projectID' });
+        project.hasMany(projectImages, { foreignKey: 'projectID' });
 
         // Sync models
         await sequelize.sync({ alter: true });
