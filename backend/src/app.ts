@@ -1,5 +1,6 @@
 //External Dependencies import
 import express from 'express';
+import fileupload from 'express-fileupload';
 import ip from 'ip';
 import * as dotenv from 'dotenv';
 import { Logger } from 'tslog';
@@ -18,6 +19,8 @@ const port = process.env.PORT || 3000;
 
 //Configuring express
 const app = express();
+app.use(fileupload());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 //Routes import

@@ -7,8 +7,9 @@ export const projectImages = sequelize.define('projectImages', {
         primaryKey: true,
         autoIncrement: true,
     },
-    projectImagesURL: {
+    projectImagesFileName: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
     },
 });

@@ -1,2 +1,4 @@
 
 backend/.env
+backend/src/public/uploadedImages/
+!backend/src/public/uploadedImages/.gitkeep
