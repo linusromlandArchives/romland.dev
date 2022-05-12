@@ -43,8 +43,9 @@ import { programmingLanguage, project, projectImages } from './models/models';
         log.info('Connection has been established successfully to MySQL.');
 
         // Establish relations
-        programmingLanguage.belongsToMany(project, { through: 'programmingLanguageProject' });
-        project.hasMany(projectImages);
+        project.belongsToMany(programmingLanguage, { through: 'projectProgrammingLanguage' });
+        programmingLanguage.belongsToMany(project, { through: 'projectProgrammingLanguage' });
+
         projectImages.belongsTo(project, { foreignKey: 'projectID' });
         project.hasMany(projectImages, { foreignKey: 'projectID' });
 

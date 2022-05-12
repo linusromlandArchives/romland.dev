@@ -57,7 +57,7 @@ router.post('/', async (req: Request, res: Response) => {
         if (error.name === 'SequelizeUniqueConstraintError') {
             return res.status(400).json({
                 success: false,
-                error: `The language ${req.body.languageName} already exists.`,
+                error: `The language ${req.body.programmingLanguageName} already exists.`,
             });
         }
 
@@ -102,7 +102,7 @@ router.put('/', async (req: Request, res: Response) => {
         if (error.name === 'SequelizeUniqueConstraintError') {
             return res.status(400).json({
                 success: false,
-                error: `The language ${req.body.languageName} already exists.`,
+                error: `The language ${req.body.programmingLanguageName} already exists.`,
             });
         }
 

@@ -2,7 +2,7 @@
 import { Request, Response, Router } from 'express';
 
 //Local Dependencies Import
-import { project, projectImages } from '../models/models';
+import { project, projectImages, programmingLanguage } from '../models/models';
 
 //Variable Declarations
 const router = Router();
@@ -13,7 +13,7 @@ const router = Router();
 router.get('/', async (req: Request, res: Response) => {
     try {
         const projects = await project.findAll({
-            include: [projectImages],
+            include: [projectImages, programmingLanguage],
         });
         res.json({
             success: true,
@@ -36,7 +36,8 @@ router.post('/', async (req: Request, res: Response) => {
         !req.body.projectName ||
         !req.body.projectDescription ||
         !req.body.projectSourceCodeURL ||
-        !req.body.projectURL
+        !req.body.projectURL ||
+        !req.body.languageIDs
     ) {
         return res.status(400).json({
             success: false,
@@ -45,12 +46,21 @@ router.post('/', async (req: Request, res: Response) => {
     }
 
     try {
-        const createdProject = await project.create({
+        const createdProject = (await project.create({
             projectName: req.body.projectName,
             projectDescription: req.body.projectDescription,
             projectSourceCodeURL: req.body.projectSourceCodeURL,
             projectURL: req.body.projectURL,
-        });
+        })) as any;
+
+        await createdProject.addProgrammingLanguages(
+            await programmingLanguage.findAll({
+                where: {
+                    programmingLanguageID: req.body.languageIDs,
+                },
+            }),
+        );
+
         res.status(201).json({
             success: true,
             error: '',
@@ -76,7 +86,7 @@ router.post('/', async (req: Request, res: Response) => {
  * @api {put} /api/project/ Edits the project with the specified id
  */
 router.put('/', async (req: Request, res: Response) => {
-    const foundProject = await project.findByPk(req.body.projectID);
+    const foundProject = (await project.findByPk(req.body.projectID)) as any;
     if (!foundProject) {
         return res.status(404).json({
             success: false,
@@ -88,7 +98,8 @@ router.put('/', async (req: Request, res: Response) => {
         !req.body.projectName &&
         !req.body.projectDescription &&
         !req.body.projectSourceCodeURL &&
-        !req.body.projectURL
+        !req.body.projectURL &&
+        !req.body.languageIDs
     ) {
         return res.status(400).json({
             success: false,
@@ -103,6 +114,15 @@ router.put('/', async (req: Request, res: Response) => {
             projectSourceCodeURL: req.body.projectSourceCodeURL,
             projectURL: req.body.projectURL,
         });
+
+        await foundProject.setProgrammingLanguages(
+            await programmingLanguage.findAll({
+                where: {
+                    programmingLanguageID: req.body.languageIDs,
+                },
+            }),
+        );
+
         res.json({
             success: true,
             error: '',
