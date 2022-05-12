@@ -80,7 +80,7 @@ router.put('/', async (req: Request, res: Response) => {
         });
     }
 
-    if (!req.body.programmingLanguageName || !req.body.programmingLanguageIcon || !req.body.programmingLanguageURL) {
+    if (!req.body.programmingLanguageName && !req.body.programmingLanguageIcon && !req.body.programmingLanguageURL) {
         return res.status(400).json({
             success: false,
             error: 'Please provide a valid programmingLanguageName, programmingLanguageIcon or programmingLanguageURL.',
