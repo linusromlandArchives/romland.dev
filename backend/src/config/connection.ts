@@ -9,7 +9,7 @@ const log: Logger = new Logger();
 //MySQL Login Credintials
 const MYSQLHOST = process.env.MYSQLHOST || 'localhost';
 const MYSQLUSER = process.env.MYSQLUSER || 'root';
-const MYSQLPASS = process.env.MYSQLPASS || '123456789';
+const MYSQLPASS = process.env.MYSQLPASS || '1234';
 const MYSQLDB = process.env.MYSQLDB || 'testDB';
 
 log.info(MYSQLPASS);

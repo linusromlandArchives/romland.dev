@@ -41,8 +41,7 @@ import { programmingLanguage, project, projectImages } from './models/models';
 
         // Establish relations
         programmingLanguage.belongsToMany(project, { through: 'programmingLanguageProject' });
-        project.hasMany(programmingLanguage, { through: 'programmingLanguageProject' });
-
+        project.hasMany(projectImages);
         projectImages.belongsTo(project, { foreignKey: 'projectID' });
         project.hasMany(projectImages, { foreignKey: 'projectID' });
 
