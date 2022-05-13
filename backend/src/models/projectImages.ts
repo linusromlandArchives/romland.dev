@@ -3,9 +3,9 @@ import { DataTypes } from 'sequelize';
 
 export const projectImages = sequelize.define('projectImages', {
     projectImagesID: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
-        autoIncrement: true,
     },
     projectImagesFileName: {
         type: DataTypes.STRING,

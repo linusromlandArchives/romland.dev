@@ -3,9 +3,9 @@ import { DataTypes } from 'sequelize';
 
 export const project = sequelize.define('project', {
     projectID: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
-        autoIncrement: true,
     },
     projectName: {
         type: DataTypes.STRING,

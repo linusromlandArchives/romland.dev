@@ -31,19 +31,21 @@ router.get('/', async (req: Request, res: Response) => {
  */
 router.post('/', async (req: Request, res: Response) => {
     if (
-        (!req.body.programmingLanguageName && req.body.programmingLanguageName.length < 1) ||
+        !req.body.programmingLanguageName ||
         !req.body.programmingLanguageIcon ||
-        !req.body.programmingLanguageURL
+        !req.body.programmingLanguageURL ||
+        !req.body.programmingLanguageDescription
     ) {
         return res.status(400).json({
             success: false,
-            error: 'Please provide a valid programmingLanguageName, programmingLanguageIcon and programmingLanguageURL.',
+            error: 'Please provide a valid programmingLanguageName, programmingLanguageIcon, programmingLanguageDescription and programmingLanguageURL.',
         });
     }
 
     try {
         const language = await programmingLanguage.create({
             programmingLanguageName: req.body.programmingLanguageName,
+            programmingLanguageDescription: req.body.programmingLanguageDescription,
             programmingLanguageIcon: req.body.programmingLanguageIcon,
             programmingLanguageURL: req.body.programmingLanguageURL,
         });
@@ -80,16 +82,22 @@ router.put('/', async (req: Request, res: Response) => {
         });
     }
 
-    if (!req.body.programmingLanguageName && !req.body.programmingLanguageIcon && !req.body.programmingLanguageURL) {
+    if (
+        !req.body.programmingLanguageName &&
+        !req.body.programmingLanguageIcon &&
+        !req.body.programmingLanguageURL &&
+        !req.body.programmingLanguageDescription
+    ) {
         return res.status(400).json({
             success: false,
-            error: 'Please provide a valid programmingLanguageName, programmingLanguageIcon or programmingLanguageURL.',
+            error: 'Please provide a valid programmingLanguageName, programmingLanguageIcon, programmingLanguageDescription programmingLanguageURL.',
         });
     }
 
     try {
         const updatedLanguage = await language.update({
             programmingLanguageName: req.body.programmingLanguageName,
+            programmingLanguageDescription: req.body.programmingLanguageDescription,
             programmingLanguageIcon: req.body.programmingLanguageIcon,
             programmingLanguageURL: req.body.programmingLanguageURL,
         });
