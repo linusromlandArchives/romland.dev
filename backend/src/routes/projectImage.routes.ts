@@ -11,8 +11,8 @@ const router = Router();
 /**
  * @api {post} /api/projectImage/ Create a new projectImage
  */
-router.post('/', async (req: Request, res: Response) => {
-    if (!req.body.projectID) {
+router.post('/:projectID', async (req: Request, res: Response) => {
+    if (!req.params.projectID) {
         return res.status(400).json({
             success: false,
             error: 'Missing required fields',
@@ -20,7 +20,7 @@ router.post('/', async (req: Request, res: Response) => {
     }
 
     //Find the project by its ID
-    const foundProject = await project.findByPk(req.body.projectID);
+    const foundProject = await project.findByPk(req.params.projectID);
 
     //If project is not found, return error
     if (!foundProject) {
