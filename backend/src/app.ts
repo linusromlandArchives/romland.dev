@@ -5,14 +5,14 @@ import ip from 'ip';
 import * as dotenv from 'dotenv';
 import { Logger } from 'tslog';
 
+//Configuring dotenv
+dotenv.config();
+
 //Internal dependencies import
 import { sequelize, createDatabase } from './config/connection';
 
 //Initialize logger
 const log: Logger = new Logger();
-
-//Configuring dotenv
-dotenv.config();
 
 //Variable Declarations
 const port = process.env.PORT || 3000;

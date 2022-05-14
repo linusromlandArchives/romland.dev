@@ -12,8 +12,6 @@ const MYSQLUSER = process.env.MYSQLUSER || 'root';
 const MYSQLPASS = process.env.MYSQLPASS || '1234';
 const MYSQLDB = process.env.MYSQLDB || 'testDB';
 
-log.info(MYSQLPASS);
-
 export const sequelize = new Sequelize(`mysql://${MYSQLUSER}:${MYSQLPASS}@${MYSQLHOST}:3306/${MYSQLDB}`, {
     logging: false,
 });
