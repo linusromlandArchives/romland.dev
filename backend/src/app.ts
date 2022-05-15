@@ -30,9 +30,6 @@ app.use('/api/', apiRoutes);
 //Models import
 import { programmingLanguage, project, projectImages } from './models/models';
 
-//Add Frontend Build
-//app.use('/', express.static(path.join(path.resolve(), '../frontend/dist')));
-
 (async () => {
     try {
         // Create db if it doesn't exist
