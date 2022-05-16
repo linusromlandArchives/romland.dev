@@ -1,7 +1,8 @@
 <h1 align="center">
   Romland.Dev
 </h1>
-<p align="center">Source Code for my project website where you can se some of my projects.<br></p>
+<p align="center">Source Code for my project website where you can se some of my projects.</p>
+<p align="center">Built with a backend in <b>TypeScript & Sequilize</b> and a frontend in <b>React</b>.
 
 ## ⚠️ License
 
