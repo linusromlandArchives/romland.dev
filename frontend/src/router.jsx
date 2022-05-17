@@ -2,8 +2,7 @@
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 
 //Views import
-import Home from './views/Home';
-import About from './views/About';
+import { Home, About } from './views';
 
 export default function () {
     return (
