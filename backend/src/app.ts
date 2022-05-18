@@ -4,6 +4,8 @@ import fileupload from 'express-fileupload';
 import ip from 'ip';
 import * as dotenv from 'dotenv';
 import { Logger } from 'tslog';
+import path from 'path';
+import history from 'connect-history-api-fallback';
 
 //Configuring dotenv
 dotenv.config();
@@ -48,6 +50,10 @@ import { programmingLanguage, project, projectImages } from './models/models';
 
         // Sync models
         await sequelize.sync({ alter: true });
+
+        //Serve static files from the React app
+        app.use(history());
+        app.use('/', express.static(path.join(path.resolve(), '../frontend/dist')));
 
         app.listen(port, () => {
             log.info(
