@@ -32,11 +32,11 @@ Used to authenticate a user and generate a token.
 
 **Content example**
 
-````json
+```json
 {
-	success: true,
-    error: "",
-    user: user,
+	"success": true,
+	"error": "",
+	"user": "USER_OBJECT",
 }
 ```
 
@@ -50,7 +50,7 @@ Used to authenticate a user and generate a token.
 
 ```json
 {
-	success: false,
-	error: 'Username or password is incorrect',
+	"success": false,
+	"error": "Username or password is incorrect",
 }
-````
+```
