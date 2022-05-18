@@ -9,11 +9,25 @@ const router = Router();
 
 router.post(
     '/login',
-    passport.authenticate('local', {
-        successRedirect: '/api/auth',
-        failureRedirect: '/api/tjos',
-        failureFlash: true,
-    }),
+    passport.authenticate('local'),
+    (req: Request, res: Response) => {
+        const user = req.user;
+        req.login(user, (err: any) => {
+            if (err) {
+                return res.status(400).json({
+                    success: false,
+                    error: 'Username or password is incorrect',
+                });
+            }
+
+            res.status(200).json({
+                success: true,
+                error: "",
+                user: user,
+        }); 
+    });
+}
+
 );
 
 router.get('/', async (req: Request, res: Response) => {
