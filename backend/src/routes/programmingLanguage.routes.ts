@@ -2,7 +2,8 @@
 import { Request, Response, Router } from 'express';
 
 //Local Dependencies Import
-import { programmingLanguage } from '../models/models';
+import { programmingLanguage } from '../models';
+import { checkAdmin } from '../auth';
 
 //Variable Declarations
 const router = Router();
@@ -29,7 +30,7 @@ router.get('/', async (req: Request, res: Response) => {
 /**
  * @api {post} /api/language/ Create a new language
  */
-router.post('/', async (req: Request, res: Response) => {
+router.post('/', checkAdmin, async (req: Request, res: Response) => {
     if (
         !req.body.programmingLanguageName ||
         !req.body.programmingLanguageIcon ||
@@ -73,7 +74,7 @@ router.post('/', async (req: Request, res: Response) => {
 /**
  * @api {put} /api/language/ Edits the language with the specified id
  */
-router.put('/', async (req: Request, res: Response) => {
+router.put('/', checkAdmin, async (req: Request, res: Response) => {
     const language = await programmingLanguage.findByPk(req.body.programmingLanguageID);
     if (!language) {
         return res.status(404).json({
@@ -124,7 +125,7 @@ router.put('/', async (req: Request, res: Response) => {
 /**
  * @api {delete} /api/language/ Delete a language
  */
-router.delete('/', async (req: Request, res: Response) => {
+router.delete('/', checkAdmin, async (req: Request, res: Response) => {
     if (!req.body.programmingLanguageID) {
         return res.status(400).json({
             success: false,

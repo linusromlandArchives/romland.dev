@@ -3,6 +3,7 @@ import { Router } from 'express';
 import programmingLanguageRoutes from './programmingLanguage.routes';
 import projectRoutes from './project.routes';
 import projectImage from './projectImage.routes';
+import authRoutes from './auth.routes';
 
 //Variable Declarations
 const router = Router();
@@ -10,5 +11,6 @@ const router = Router();
 router.use('/programmingLanguage', programmingLanguageRoutes);
 router.use('/project', projectRoutes);
 router.use('/projectImage', projectImage);
+router.use('/auth', authRoutes);
 
 export default router;

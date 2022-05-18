@@ -1,6 +1,8 @@
 //External Dependencies import
 import express from 'express';
+import flash from 'express-flash';
 import fileupload from 'express-fileupload';
+import session from 'express-session';
 import ip from 'ip';
 import * as dotenv from 'dotenv';
 import { Logger } from 'tslog';
@@ -12,6 +14,7 @@ dotenv.config();
 
 //Internal dependencies import
 import { sequelize, createDatabase } from './config/connection';
+import { initializePassport, passport } from './config/passport';
 
 //Initialize logger
 const log: Logger = new Logger();
@@ -21,16 +24,26 @@ const port = process.env.PORT || 3000;
 
 //Configuring express
 const app = express();
+app.use(
+    session({
+        secret: process.env.SESSION_SECRET as string,
+        resave: false,
+        saveUninitialized: false,
+    }),
+);
 app.use(fileupload());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 
 //Routes import
 import apiRoutes from './routes/api.routes';
 app.use('/api/', apiRoutes);
 
 //Models import
-import { programmingLanguage, project, projectImages } from './models/models';
+import { programmingLanguage, project, projectImages } from './models';
 
 (async () => {
     try {
@@ -49,11 +62,14 @@ import { programmingLanguage, project, projectImages } from './models/models';
         project.hasMany(projectImages, { foreignKey: 'projectID' });
 
         // Sync models
-        await sequelize.sync({ alter: true });
+        await sequelize.sync();
 
         //Serve static files from the React app
         app.use(history());
         app.use('/', express.static(path.join(path.resolve(), '../frontend/dist')));
+
+        //Initialize passport
+        initializePassport();
 
         app.listen(port, () => {
             log.info(
