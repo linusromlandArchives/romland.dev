@@ -2,7 +2,6 @@
 import { Request, Response, Router } from 'express';
 
 //Local Dependencies Import
-import { checkAdmin } from '../auth';
 import { passport } from '../config/passport';
 
 //Variable Declarations
