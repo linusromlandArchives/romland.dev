@@ -1,5 +1,6 @@
 //External Dependencies Import
 import { Request, Response, Router } from 'express';
+import { Op } from 'sequelize';
 
 //Local Dependencies Import
 import { programmingLanguage } from '../models';
@@ -12,8 +13,18 @@ const router = Router();
  * @api {get} /api/language/ Returns all languages
  */
 router.get('/', async (req: Request, res: Response) => {
+    const ids = req.query.ids as string;
+
+    const conditions = {} as any;
+
+    if (ids) {
+        conditions.programmingLanguageID = { [Op.in]: ids.split(',') };
+    }
+
     try {
-        const languages = await programmingLanguage.findAll();
+        const languages = await programmingLanguage.findAll({
+            where: conditions,
+        });
         res.json({
             success: true,
             error: '',
