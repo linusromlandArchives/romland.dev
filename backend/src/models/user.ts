@@ -1,5 +1,8 @@
-import { sequelize } from '../config/connection';
+//External Dependencies Import
 import { DataTypes } from 'sequelize';
+
+//Internal Dependencies Import
+import { sequelize } from '../config/connection';
 
 export const user = sequelize.define('user', {
     userID: {
@@ -13,7 +16,7 @@ export const user = sequelize.define('user', {
         unique: true,
     },
     password: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING,
         allowNull: false,
     },
 });
