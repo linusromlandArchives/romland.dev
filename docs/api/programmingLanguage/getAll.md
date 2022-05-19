@@ -10,6 +10,14 @@ Used to retrieve all Programming Languages.
 
 **Auth required** : `false`
 
+## Available parameters
+
+All parameters are sent as query string parameters.
+
+-   `ids` - Will only return programming languages with the given ids.
+
+**_Note:_** The `ids` parameter is a comma separated list of unique ids.
+
 ## Success Response
 
 **Code** : `200 OK`
