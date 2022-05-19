@@ -39,7 +39,7 @@ router.post('/', checkAdmin, async (req: Request, res: Response) => {
     ) {
         return res.status(400).json({
             success: false,
-            error: 'Please provide a valid programmingLanguageName, programmingLanguageIcon, programmingLanguageDescription and programmingLanguageURL.',
+            error: 'Missing required fields.',
         });
     }
 
@@ -91,7 +91,7 @@ router.put('/', checkAdmin, async (req: Request, res: Response) => {
     ) {
         return res.status(400).json({
             success: false,
-            error: 'Please provide a valid programmingLanguageName, programmingLanguageIcon, programmingLanguageDescription programmingLanguageURL.',
+            error: 'Please provide a valid programmingLanguageName, programmingLanguageIcon, programmingLanguageDescription or programmingLanguageURL.',
         });
     }
 
