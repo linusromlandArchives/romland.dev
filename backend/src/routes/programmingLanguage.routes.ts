@@ -147,7 +147,8 @@ router.delete('/', checkAdmin, async (req: Request, res: Response) => {
         } else {
             return res.status(200).json({
                 success: true,
-                error: 'Language deleted',
+                error: '',
+                message: 'Language deleted',
             });
         }
     } catch (error: any) {

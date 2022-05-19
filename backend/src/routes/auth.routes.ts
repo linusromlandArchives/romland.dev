@@ -39,21 +39,36 @@ router.post('/login', (req: Request, res: Response) => {
 
 router.get('/', async (req: Request, res: Response) => {
     if (req.user) {
+        const { userID, username, createdAt, updatedAt } = req.user as any;
         res.status(200).json({
             success: true,
-            user: req.user,
+            error: '',
+            user: { userID, username, createdAt, updatedAt },
         });
     } else {
-        res.status(200).json({
+        res.status(401).json({
             success: false,
+            error: 'Unauthorized',
             user: null,
         });
     }
 });
 
 router.get('/logout', (req: Request, res: Response) => {
-    req.logout();
-    res.redirect('/');
+    try {
+        req.logout();
+        res.status(200).json({
+            success: true,
+            error: '',
+            message: 'Logout Successful',
+        });
+    } catch (error: any) {
+        res.status(500).json({
+            success: false,
+            error: error.message,
+            message: 'Logout Failed',
+        });
+    }
 });
 
 export default router;
