@@ -30,4 +30,4 @@ For information about what Colors, Fonts and icons i used, check the [`BRAND.md`
 
 ## ⚠️ License
 
-`Github Statistics` is free and open-source software licensed under the [MIT License](https://github.com/linusromland-ITHS/Native-JavaScript-Laboration-2/blob/master/LICENSE).
+`Romland.dev` is free and open-source software licensed under the [MIT License](https://github.com/linusromland-ITHS/Native-JavaScript-Laboration-2/blob/master/LICENSE).
