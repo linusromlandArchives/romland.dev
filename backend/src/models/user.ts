@@ -26,4 +26,8 @@ user.addHook('beforeCreate', async (user: any) => {
     user.password = await bcrypt.hash(user.password, 10);
 });
 
+user.prototype.validatePassword = async function (password: string) {
+    return await bcrypt.compare(password, this.password);
+};
+
 export default user;
