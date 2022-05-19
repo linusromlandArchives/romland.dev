@@ -56,6 +56,19 @@ Used to create a Programming Language.
 
 ## Error Response
 
+### If not all fields are included in the body.
+
+**Code** : `400 Bad Request`
+
+**Content** :
+
+```json
+{
+	"success": false,
+	"error": "Missing required fields."
+}
+```
+
 ### If `programmingLanguageName` already exists.
 
 **Code** : `400 Bad Request`

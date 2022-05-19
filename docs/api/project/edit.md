@@ -58,6 +58,32 @@ Used to edit a project.
 
 ## Error Response
 
+### If project is not found.
+
+**Code** : `400 Bad Request`
+
+**Content** :
+
+```json
+{
+	"success": false,
+	"error": "Project not found."
+}
+```
+
+### If no fields are included in the body.
+
+**Code** : `400 Bad Request`
+
+**Content** :
+
+```json
+{
+	"success": false,
+	"error": "Please provide a valid projectName, projectDescription, projectSourceCodeURL, projectURL or languageIDs."
+}
+```
+
 ### If `projectName` already exists.
 
 **Code** : `400 Bad Request`

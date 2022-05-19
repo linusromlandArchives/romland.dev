@@ -39,6 +39,73 @@ Used to create a project image.
 }
 ```
 
+## Error Response
+
+### If project is not found.
+
+**Code** : `400 Bad Request`
+
+**Content** :
+
+```json
+{
+	"success": false,
+	"error": "Project not found"
+}
+```
+
+### If no file is uploaded.
+
+**Code** : `400 Bad Request`
+
+**Content** :
+
+```json
+{
+	"success": false,
+	"error": "No files were uploaded"
+}
+```
+
+### If file is not of type image.
+
+**Code** : `400 Bad Request`
+
+**Content** :
+
+```json
+{
+	"success": false,
+	"error": "File is not an image"
+}
+```
+
+### If file is too large.
+
+**Code** : `400 Bad Request`
+
+**Content** :
+
+```json
+{
+	"success": false,
+	"error": "File is too large"
+}
+```
+
+### If file that has already been uploaded is uploaded again.
+
+**Code** : `400 Bad Request`
+
+**Content** :
+
+```json
+{
+	"success": false,
+	"error": "The project image fileName already exists"
+}
+```
+
 ### If user is not authorized.
 
 **Code** : `401 Unauthorized`

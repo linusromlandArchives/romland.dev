@@ -57,6 +57,32 @@ Used to edit a Programming Language.
 
 ## Error Response
 
+### If language is not found.
+
+**Code** : `400 Bad Request`
+
+**Content** :
+
+```json
+{
+	"success": false,
+	"error": "Language not found."
+}
+```
+
+### If no fields are included in the body.
+
+**Code** : `400 Bad Request`
+
+**Content** :
+
+```json
+{
+	"success": false,
+	"error": "Please provide a valid programmingLanguageName, programmingLanguageIcon, programmingLanguageDescription or programmingLanguageURL."
+}
+```
+
 ### If `programmingLanguageName` already exists.
 
 **Code** : `400 Bad Request`
