@@ -4,7 +4,7 @@
 
 Used to create a project image.
 
-**URL** : `/api/projectImage/[projectImageID]`
+**URL** : `/api/projectImage/[projectID]`
 
 **Method** : `POST`
 
@@ -12,7 +12,7 @@ Used to create a project image.
 
 **Data constraints**
 
-> Specify the project image ID in the URL.
+> Specify the project ID in the URL.
 
 | Required | Parameter | Description             | Datatype |
 | -------- | --------- | ----------------------- | -------- |
