@@ -104,7 +104,7 @@ router.put('/', checkAdmin, async (req: Request, res: Response) => {
     ) {
         return res.status(400).json({
             success: false,
-            error: 'Missing required fields',
+            error: 'Please provide a valid projectName, projectDescription, projectSourceCodeURL, projectURL or languageIDs',
         });
     }
 
