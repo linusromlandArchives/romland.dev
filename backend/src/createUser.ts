@@ -4,6 +4,7 @@ import { Logger } from 'tslog';
 
 //Local Dependencies Import
 import { sequelize, createDatabase } from './config/connection';
+import establishRelations from './config/relations';
 
 //Initialize logger
 const log: Logger = new Logger();
@@ -18,6 +19,9 @@ import { user } from './models';
     // Validate connection
     await sequelize.authenticate();
     log.info('Connection has been established successfully to MySQL.');
+
+    // Establish relations
+    await establishRelations();
 
     log.info('This guide will help you create a new user in the database.');
 

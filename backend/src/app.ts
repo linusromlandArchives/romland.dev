@@ -15,6 +15,7 @@ dotenv.config();
 //Internal dependencies import
 import { sequelize, createDatabase } from './config/connection';
 import { initializePassport, passport } from './config/passport';
+import establishRelations from './config/relations';
 
 //Initialize logger
 const log: Logger = new Logger();
@@ -43,9 +44,6 @@ app.use(passport.session());
 import apiRoutes from './routes/api.routes';
 app.use('/api/', apiRoutes);
 
-//Models import
-import { programmingLanguage, project, projectImages } from './models';
-
 (async () => {
     try {
         // Create db if it doesn't exist
@@ -56,11 +54,7 @@ import { programmingLanguage, project, projectImages } from './models';
         log.info('Connection has been established successfully to MySQL.');
 
         // Establish relations
-        project.belongsToMany(programmingLanguage, { through: 'projectProgrammingLanguage' });
-        programmingLanguage.belongsToMany(project, { through: 'projectProgrammingLanguage' });
-
-        projectImages.belongsTo(project, { foreignKey: 'projectID' });
-        project.hasMany(projectImages, { foreignKey: 'projectID' });
+        await establishRelations();
 
         // Sync models
         await sequelize.sync();
