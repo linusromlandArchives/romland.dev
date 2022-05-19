@@ -1,6 +1,7 @@
 //External Dependencies Import
 import { Request, Response, Router } from 'express';
 import fs from 'fs';
+import path from 'path';
 
 //Local Dependencies Import
 import { project, projectImages } from '../models';
@@ -8,6 +9,33 @@ import { checkAdmin } from '../auth';
 
 //Variable Declarations
 const router = Router();
+
+/**
+ * @api {get} /api/projectImage/ Send the projectImage with the specified id
+ */
+router.get('/:id', async (req: Request, res: Response) => {
+    try {
+        const projectImage = (await projectImages.findOne({
+            where: {
+                projectImagesID: req.params.id,
+            },
+        })) as any;
+        if (projectImage) {
+            res.status(200).sendFile(path.join(path.resolve(), `src/public/uploadedImages/${projectImage.projectImagesFileName}`));
+        } else {
+            res.status(404).json({
+                success: false,
+
+                error: 'Project Image not found',
+            });
+        }
+    } catch (error: any) {
+        res.status(500).json({
+            success: false,
+            error: error.message,
+        });
+    }
+});
 
 /**
  * @api {post} /api/projectImage/ Create a new projectImage
