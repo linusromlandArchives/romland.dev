@@ -39,7 +39,7 @@ router.post('/', checkAdmin, async (req: Request, res: Response) => {
     ) {
         return res.status(400).json({
             success: false,
-            error: 'Please provide a valid programmingLanguageName, programmingLanguageIcon, programmingLanguageDescription and programmingLanguageURL.',
+            error: 'Missing required fields.',
         });
     }
 
@@ -66,7 +66,7 @@ router.post('/', checkAdmin, async (req: Request, res: Response) => {
 
         res.status(500).json({
             success: false,
-            message: error.message,
+            error: error.message,
         });
     }
 });
@@ -91,7 +91,7 @@ router.put('/', checkAdmin, async (req: Request, res: Response) => {
     ) {
         return res.status(400).json({
             success: false,
-            error: 'Please provide a valid programmingLanguageName, programmingLanguageIcon, programmingLanguageDescription programmingLanguageURL.',
+            error: 'Please provide a valid programmingLanguageName, programmingLanguageIcon, programmingLanguageDescription or programmingLanguageURL.',
         });
     }
 
@@ -147,7 +147,8 @@ router.delete('/', checkAdmin, async (req: Request, res: Response) => {
         } else {
             return res.status(200).json({
                 success: true,
-                error: 'Language deleted',
+                error: '',
+                message: 'Language deleted',
             });
         }
     } catch (error: any) {
