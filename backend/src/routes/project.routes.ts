@@ -78,7 +78,7 @@ router.post('/', checkAdmin, async (req: Request, res: Response) => {
 
         res.status(500).json({
             success: false,
-            message: error.message,
+            error: error.message,
         });
     }
 });
@@ -169,6 +169,7 @@ router.delete('/', checkAdmin, async (req: Request, res: Response) => {
         } else {
             return res.status(200).json({
                 success: true,
+                error: '',
                 message: 'Project deleted',
             });
         }

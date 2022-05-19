@@ -66,7 +66,7 @@ router.post('/', checkAdmin, async (req: Request, res: Response) => {
 
         res.status(500).json({
             success: false,
-            message: error.message,
+            error: error.message,
         });
     }
 });
