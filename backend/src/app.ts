@@ -21,12 +21,13 @@ const log: Logger = new Logger();
 
 //Variable Declarations
 const port = process.env.PORT || 3000;
+const SESSION_SECRET = (process.env.SESSION_SECRET as string) || 'secret';
 
 //Configuring express
 const app = express();
 app.use(
     session({
-        secret: process.env.SESSION_SECRET as string,
+        secret: SESSION_SECRET,
         resave: false,
         saveUninitialized: false,
     }),

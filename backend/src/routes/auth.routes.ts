@@ -7,28 +7,35 @@ import { passport } from '../config/passport';
 //Variable Declarations
 const router = Router();
 
-router.post(
-    '/login',
-    passport.authenticate('local'),
-    (req: Request, res: Response) => {
-        const user = req.user;
-        req.login(user, (err: any) => {
+router.post('/login', (req: Request, res: Response) => {
+    passport.authenticate('local', (err: Error, user: any, info: any) => {
+        if (err) {
+            return res.status(500).json({
+                success: false,
+                error: err.message,
+            });
+        }
+        if (!user) {
+            return res.status(401).json({
+                success: false,
+                error: info.message,
+            });
+        }
+        req.login(user, (err: Error) => {
             if (err) {
-                return res.status(400).json({
+                return res.status(500).json({
                     success: false,
-                    error: 'Username or password is incorrect',
+                    error: err.message,
                 });
             }
-
-            res.status(200).json({
+            return res.status(200).json({
                 success: true,
-                error: "",
-                user: user,
-        }); 
-    });
-}
-
-);
+                error: '',
+                message: 'Login Successful',
+            });
+        });
+    })(req, res);
+});
 
 router.get('/', async (req: Request, res: Response) => {
     if (req.user) {

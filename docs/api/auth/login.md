@@ -6,7 +6,7 @@ Used to authenticate a user and generate a token.
 
 **Method** : `POST`
 
-**Auth required** : NO
+**Auth required** : `false`
 
 **Data constraints**
 
@@ -21,8 +21,8 @@ Used to authenticate a user and generate a token.
 
 ```json
 {
-	"username": "adminUsernames",
-	"password": "adminPassword"
+	"username": "admin",
+	"password": "12345"
 }
 ```
 
@@ -36,21 +36,62 @@ Used to authenticate a user and generate a token.
 {
 	"success": true,
 	"error": "",
-	"user": "USER_OBJECT",
+	"message": "Login Successful"
 }
 ```
 
 ## Error Response
 
-**Condition** : If 'username' and 'password' combination is wrong.
+### If `username` and `password` are not provided.
 
-**Code** : `400 BAD REQUEST`
+**Code** : `401 Unauthorized`
 
 **Content** :
 
 ```json
 {
 	"success": false,
-	"error": "Username or password is incorrect",
+	"error": "Missing credentials"
 }
 ```
+
+### If `username` is wrong.
+
+**Code** : `401 Unauthorized`
+
+**Content** :
+
+```json
+{
+	"success": false,
+	"error": "Incorrect username."
+}
+```
+
+### If `password` is wrong.
+
+**Code** : `401 Unauthorized`
+
+**Content** :
+
+```json
+{
+	"success": false,
+	"error": "Incorrect password."
+}
+```
+
+### Unknown error.
+
+**Code** : `500 Internal Server Error`
+
+**Content** :
+
+```json
+{
+	"success": false,
+	"error": ""
+}
+```
+
+**_Note:_** The error message is not specified in the documentation.
