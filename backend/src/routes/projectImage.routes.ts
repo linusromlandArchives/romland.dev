@@ -69,7 +69,7 @@ router.post('/:projectID', checkAdmin, async (req: Request, res: Response) => {
 
     try {
         const createdProjectImage = await projectImages.create({
-            projectID: req.body.projectID,
+            projectID: req.params.projectID,
             projectImagesFileName: fileName,
         });
 
