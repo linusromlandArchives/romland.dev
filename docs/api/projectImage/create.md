@@ -12,13 +12,16 @@ Used to create a project image.
 
 **Data constraints**
 
-> Specify the project ID in the URL.
+Specify the project ID in the URL.
+
+**URL example** : `/api/projectImage/xxxxxxxx-xxxx-4xxx-xxxx-xxxxxxxxxxxx`
+
 
 | Required | Parameter | Description             | Datatype |
 | -------- | --------- | ----------------------- | -------- |
 | `true`   | file      | The File to be uploaded | File     |
 
-**_Note:_** The project image body is **NOT** a JSON object. Send the body as a `multipart/form-data`.
+**_Note:_** The project image body is **NOT** a JSON object. Send the body as a `multipart/form-data` and include the file under the parameter `file`.
 
 ## Success Response
 
