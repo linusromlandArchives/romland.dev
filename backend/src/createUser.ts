@@ -1,14 +1,25 @@
 //External Dependencies Import
 import inquirer from 'inquirer';
-import bcrypt from 'bcrypt';
+import { Logger } from 'tslog';
 
 //Local Dependencies Import
 import { sequelize, createDatabase } from './config/connection';
 
+//Initialize logger
+const log: Logger = new Logger();
+
+//Models import
 import { user } from './models';
 
 (async () => {
-    console.log('This guide will help you create a new user in the database.');
+    // Create db if it doesn't exist
+    await createDatabase();
+
+    // Validate connection
+    await sequelize.authenticate();
+    log.info('Connection has been established successfully to MySQL.');
+
+    log.info('This guide will help you create a new user in the database.');
 
     const username = await inquirer.prompt([
         {
@@ -39,22 +50,12 @@ import { user } from './models';
         return;
     }
 
-    // Create db if it doesn't exist
-    await createDatabase();
-
-    // Validate connection
-    await sequelize.authenticate();
-    console.log('Connection has been established successfully to MySQL.');
-
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password.password, 10);
-
     // Create the user
     await user.create({
         username: username.username,
-        password: hashedPassword,
+        password: password.password,
     });
 
-    console.log('User created successfully.');
+    log.info('User created successfully.');
     process.exit(0);
 })();

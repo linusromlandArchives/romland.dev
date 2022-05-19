@@ -1,10 +1,11 @@
 //External Dependencies Import
 import { DataTypes } from 'sequelize';
+import bcrypt from 'bcrypt';
 
 //Internal Dependencies Import
 import { sequelize } from '../config/connection';
 
-export const user = sequelize.define('user', {
+const user = sequelize.define('user', {
     userID: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
@@ -20,3 +21,9 @@ export const user = sequelize.define('user', {
         allowNull: false,
     },
 });
+
+user.addHook('beforeCreate', async (user: any) => {
+    user.password = await bcrypt.hash(user.password, 10);
+});
+
+export default user;
