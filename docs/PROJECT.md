@@ -16,6 +16,14 @@
 
 `Romland.dev` will become a website that will display my projects with links to source code and demo. It will also have a admin site to add, edit and delete projects.
 
+## API documentation
+
+To read the API documentation, please check [here](api/README.md).
+
+## Setup guide
+
+To learn on how to build and run the project, please check [here](SETUP.md).
+
 ## Colors, Fonts and icons
 
 For information about what Colors, Fonts and icons i used, check the [`BRAND.md`](BRAND.md)
