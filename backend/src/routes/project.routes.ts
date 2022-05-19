@@ -2,7 +2,8 @@
 import { Request, Response, Router } from 'express';
 
 //Local Dependencies Import
-import { project, projectImages, programmingLanguage } from '../models/models';
+import { project, projectImages, programmingLanguage } from '../models';
+import { checkAdmin } from '../auth';
 
 //Variable Declarations
 const router = Router();
@@ -31,7 +32,7 @@ router.get('/', async (req: Request, res: Response) => {
 /**
  * @api {post} /api/project/ Create a new project
  */
-router.post('/', async (req: Request, res: Response) => {
+router.post('/', checkAdmin, async (req: Request, res: Response) => {
     if (
         !req.body.projectName ||
         !req.body.projectDescription ||
@@ -85,7 +86,7 @@ router.post('/', async (req: Request, res: Response) => {
 /**
  * @api {put} /api/project/ Edits the project with the specified id
  */
-router.put('/', async (req: Request, res: Response) => {
+router.put('/', checkAdmin, async (req: Request, res: Response) => {
     const foundProject = (await project.findByPk(req.body.projectID)) as any;
     if (!foundProject) {
         return res.status(404).json({
@@ -146,7 +147,7 @@ router.put('/', async (req: Request, res: Response) => {
 /**
  * @api {delete} /api/project/ Delete a project
  */
-router.delete('/', async (req: Request, res: Response) => {
+router.delete('/', checkAdmin, async (req: Request, res: Response) => {
     if (!req.body.projectID) {
         return res.status(400).json({
             success: false,

@@ -3,7 +3,8 @@ import { Request, Response, Router } from 'express';
 import fs from 'fs';
 
 //Local Dependencies Import
-import { project, projectImages } from '../models/models';
+import { project, projectImages } from '../models';
+import { checkAdmin } from '../auth';
 
 //Variable Declarations
 const router = Router();
@@ -11,7 +12,7 @@ const router = Router();
 /**
  * @api {post} /api/projectImage/ Create a new projectImage
  */
-router.post('/:projectID', async (req: Request, res: Response) => {
+router.post('/:projectID', checkAdmin, async (req: Request, res: Response) => {
     if (!req.params.projectID) {
         return res.status(400).json({
             success: false,
@@ -91,7 +92,7 @@ router.post('/:projectID', async (req: Request, res: Response) => {
 /**
  * @api {delete} /api/projectImage/ Delete a projectImage
  */
-router.delete('/', async (req: Request, res: Response) => {
+router.delete('/', checkAdmin, async (req: Request, res: Response) => {
     if (!req.body.projectImagesID) {
         return res.status(400).json({
             success: false,

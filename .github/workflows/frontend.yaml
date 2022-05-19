@@ -1,8 +1,8 @@
 defaults:
     run:
-        working-directory: ./backend
+        working-directory: ./frontend
 
-name: Check code with ESLint and Prettier on Backend
+name: Check code with ESLint and Prettier on Frontend
 on:
     pull_request:
     push:
