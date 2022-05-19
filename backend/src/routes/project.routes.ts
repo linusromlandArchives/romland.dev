@@ -1,5 +1,6 @@
 //External Dependencies Import
 import { Request, Response, Router } from 'express';
+import { Op } from 'sequelize';
 
 //Local Dependencies Import
 import { project, projectImages, programmingLanguage } from '../models';
@@ -12,9 +13,34 @@ const router = Router();
  * @api {get} /api/project/ Returns all projects
  */
 router.get('/', async (req: Request, res: Response) => {
+    const ids = req.query.ids as string;
+    const languageIDs = req.query.languageIDs as string;
+    const projectName = req.query.projectName as string;
+
+    const conditions = {} as any;
+    const associationsConditions = [];
+
+    if (ids) {
+        conditions.projectID = { [Op.in]: ids.split(',') };
+    }
+
+    if (projectName) {
+        conditions.projectName = { [Op.substring]: projectName };
+    }
+
+    if (languageIDs) {
+        associationsConditions.push({
+            model: programmingLanguage,
+            where: {
+                programmingLanguageID: languageIDs,
+            },
+        });
+    }
+
     try {
         const projects = await project.findAll({
-            include: [projectImages, programmingLanguage],
+            where: conditions,
+            include: [projectImages, programmingLanguage, ...associationsConditions],
         });
         res.json({
             success: true,
