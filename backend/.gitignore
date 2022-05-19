@@ -2,3 +2,6 @@ dist
 dist-ssr
 .DS_Store
 node_modules
+.env
+src/public/uploadedImages/*
+!src/public/uploadedImages/.gitkeep
