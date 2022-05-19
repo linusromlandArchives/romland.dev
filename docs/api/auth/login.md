@@ -1,8 +1,10 @@
+[Go back](../README.md)
+
 # Login
 
 Used to authenticate a user and generate a token.
 
-**URL** : `/api/login/`
+**URL** : `/api/auth/login/`
 
 **Method** : `POST`
 
