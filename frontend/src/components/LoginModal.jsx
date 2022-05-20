@@ -1,50 +1,62 @@
+//External dependencies import
 import Modal from 'react-modal';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Field, ErrorMessage, Form, Formik } from 'formik';
 
+//Local dependencies import
+import axios from '../axios';
+
 export default () => {
-    const [modalIsOpen, setModal] = useState(false);
+    const [modalIsOpen, setModal] = useState(true);
 
-    const customStyles = {
-        content: {
-            top: '50%',
-            left: '50%',
-            right: 'auto',
-            bottom: 'auto',
-            marginRight: '-50%',
-            transform: 'translate(-50%, -50%)',
-            border: 'none',
-            background: '#fff',
-            boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)',
-        },
-    };
-
-    function show() {
-        setModal(true);
-    }
-
-    function hide() {
-        setModal(false);
-    }
+    useEffect(() => {
+        async function fetchData() {
+            // You can await here
+            const request = await axios.get('/api/auth');
+            const data = await request.data;
+            if (data.success) {
+                setModal(false);
+            }
+        }
+        fetchData();
+    }, [modalIsOpen]);
 
     return (
         <>
-            <button onClick={show}>show</button>
-
             <Modal
                 isOpen={modalIsOpen}
-                onRequestClose={hide}
+                onRequestClose={() => setModal(false)}
                 shouldCloseOnOverlayClick={false}
-                style={customStyles}
                 contentLabel="Login Modal"
+                ariaHideApp={false}
+                style={{
+                    content: {
+                        top: '50%',
+                        left: '50%',
+                        right: 'auto',
+                        bottom: 'auto',
+                        marginRight: '-50%',
+                        transform: 'translate(-50%, -50%)',
+                        border: 'none',
+                        background: '#fff',
+                        boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)',
+                    },
+                }}
             >
-                <h1 className="text-2xl font-semibold">Access limited! Please login first!</h1>
+                <div className="mb-4">
+                    <h1 className="text-3xl font-semibold">Access limited</h1>
+                    <p className="text-xl"> Please login to access this page</p>
+                </div>
 
                 <Formik
                     initialValues={{ password: '', username: '', login: '' }}
                     onSubmit={(values, { setErrors }) => {
-                        setErrors({
-                            login: 'Username or password is incorrect',
+                        axios.post('/api/auth/login', values).then(({ data }) => {
+                            if (data.success) {
+                                setModal(false);
+                            } else {
+                                setErrors({ login: data.error });
+                            }
                         });
                     }}
                     validate={(values) => {
@@ -81,7 +93,7 @@ export default () => {
                             <ErrorMessage component="span" name="login" className="text-red-500 text-md mt-4 italic" />
                             <input
                                 disabled={!dirty || !isValid}
-                                className="bg-blue-500 hover:bg-blue-400 disabled:bg-blue-300 mt-4 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition ease duration-150"
+                                className="bg-blue-500 hover:bg-blue-400 disabled:bg-blue-300 mt-4 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition ease duration-150 cursor-pointer disabled:cursor-not-allowed"
                                 type="submit"
                                 value="Login"
                             />
