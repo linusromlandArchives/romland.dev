@@ -22,17 +22,16 @@ const log: Logger = new Logger();
 
 //Variable Declarations
 const port = process.env.PORT || 3000;
-const SESSION_SECRET = (process.env.SESSION_SECRET as string) || 'secret';
+const sessionSecret = (process.env.SESSION_SECRET as string) || 'secret';
+const sessionOptions = {
+    secret: sessionSecret,
+    resave: false,
+    saveUninitialized: false,
+};
 
 //Configuring express
 const app = express();
-app.use(
-    session({
-        secret: SESSION_SECRET,
-        resave: false,
-        saveUninitialized: false,
-    }),
-);
+app.use(session(sessionOptions));
 app.use(fileupload());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
