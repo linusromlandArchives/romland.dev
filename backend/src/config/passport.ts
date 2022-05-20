@@ -15,12 +15,12 @@ function initializePassport() {
                 },
             })) as any;
             if (!user) {
-                return done(null, false, { message: 'Incorrect username.' });
+                return done(null, false, { message: 'Incorrect username or password.' });
             }
             const isValid = await user.validatePassword(password);
 
             if (!isValid) {
-                return done(null, false, { message: 'Incorrect password.' });
+                return done(null, false, { message: 'Incorrect username or password.' });
             }
             return done(null, user);
         }),
