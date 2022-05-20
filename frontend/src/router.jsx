@@ -2,7 +2,7 @@
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 
 //Views import
-import { Home, About } from './views';
+import { Home, About, Admin } from './views';
 
 export default function () {
     return (
@@ -10,6 +10,7 @@ export default function () {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="about" element={<About />} />
+                <Route path="admin" element={<Admin />} />
             </Routes>
         </BrowserRouter>
     );
