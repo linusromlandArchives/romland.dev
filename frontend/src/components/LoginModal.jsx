@@ -5,6 +5,7 @@ import { Field, ErrorMessage, Form, Formik } from 'formik';
 
 //Local dependencies import
 import axios from '../axios';
+import { successNotify } from './Toast';
 
 export default () => {
     const [modalIsOpen, setModal] = useState(true);
@@ -54,6 +55,13 @@ export default () => {
                         axios.post('/api/auth/login', values).then(({ data }) => {
                             if (data.success) {
                                 setModal(false);
+                                successNotify('Login successful', {
+                                    theme: 'colored',
+                                    position: 'top-right',
+                                    autoClose: 2500,
+                                    closeOnClick: true,
+                                    pauseOnHover: true,
+                                });
                             } else {
                                 setErrors({ login: data.error });
                             }
