@@ -57,7 +57,7 @@ Used to authenticate a user and generate a token.
 }
 ```
 
-### If `username` is wrong.
+### If `username` or `password` is wrong.
 
 **Code** : `401 Unauthorized`
 
@@ -66,20 +66,7 @@ Used to authenticate a user and generate a token.
 ```json
 {
 	"success": false,
-	"error": "Incorrect username."
-}
-```
-
-### If `password` is wrong.
-
-**Code** : `401 Unauthorized`
-
-**Content** :
-
-```json
-{
-	"success": false,
-	"error": "Incorrect password."
+	"error": "Incorrect username or password."
 }
 ```
 
