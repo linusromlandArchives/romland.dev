@@ -7,8 +7,8 @@ import { user as userModel } from '../models';
 
 function initializePassport() {
     passport.use(
-        new Strategy({ usernameField: 'username' }, async (username: string, password: string, done: any) => {
-            //Find user by email
+        new Strategy(async (username: string, password: string, done: any) => {
+            //Find user by username
             const user = (await userModel.findOne({
                 where: {
                     username,
