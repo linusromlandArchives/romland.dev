@@ -14,22 +14,31 @@ function initializePassport() {
                     username,
                 },
             })) as any;
+
+            //If user not found, return done with false
             if (!user) {
                 return done(null, false, { message: 'Incorrect username or password.' });
             }
+
+            //If user found, compare password
             const isValid = await user.validatePassword(password);
 
+            //If password is not valid, return done with false
             if (!isValid) {
                 return done(null, false, { message: 'Incorrect username or password.' });
             }
+
+            //If password is valid, return done with user
             return done(null, user);
         }),
     );
 
+    //Serialize user
     passport.serializeUser((user: any, done: any) => {
         done(null, user.userID);
     });
 
+    //Deserialize user
     passport.deserializeUser(async (id: any, done: any) => {
         const user = await userModel.findByPk(id);
         done(null, user);

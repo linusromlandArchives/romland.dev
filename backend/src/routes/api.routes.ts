@@ -13,7 +13,7 @@ router.use('/project', projectRoutes);
 router.use('/projectImage', projectImage);
 router.use('/auth', authRoutes);
 
-router.get('/', (req, res) => {
+router.get('/', (_req, res) => {
     res.status(200).json({
         success: true,
         error: '',

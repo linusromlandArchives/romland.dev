@@ -1,5 +1,8 @@
-import { sequelize } from '../config/connection';
+//External Dependencies Import
 import { DataTypes } from 'sequelize';
+
+//Local Dependencies Import
+import { sequelize } from '../config/connection';
 
 const projectImages = sequelize.define('projectImages', {
     projectImagesID: {
