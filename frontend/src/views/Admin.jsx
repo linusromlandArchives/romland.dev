@@ -9,7 +9,7 @@ export default function () {
     const [activeTab, changeTab] = useState('projects');
 
     return (
-        <>
+        <div className="bg-slate-400 min-h-screen w-screen">
             <nav>
                 <ul>
                     <li>
@@ -24,6 +24,6 @@ export default function () {
                 {activeTab === 'projects' && <ProjectsTab />}
                 {activeTab === 'languages' && <LanguagesTab />}
             </div>
-        </>
+        </div>
     );
 }

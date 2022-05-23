@@ -1,6 +1,7 @@
 //External dependencies import
 import Select from 'react-select';
 import { Field, ErrorMessage, Form, Formik } from 'formik';
+import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -31,10 +32,17 @@ export default () => {
     }, []);
 
     return (
-        <div className="bg-slate-400 h-screen w-screen flex items-center justify-center">
+        <div className="bg-slate-400 min-h-screen w-screen flex items-center justify-center">
             <div className="w-full md:w-1/2 rounded-md bg-slate-200 p-4">
-                <h1 className="mb-2 text-3xl font-semibold">Create project</h1>
-
+                <div className="flex justify-between items-center">
+                    <h1 className="text-4xl font-semibold">Create project</h1>
+                    <Link
+                        to="/admin"
+                        className="text-black bg-slate-300 hover:bg-slate-200 border-slate-500 border rounded-md p-2 transition duration-150 ease"
+                    >
+                        Back to admin
+                    </Link>
+                </div>
                 <Formik
                     initialValues={{
                         projectName: '',
@@ -127,7 +135,9 @@ export default () => {
                             </label>
                             <ErrorMessage component="span" name="projectDescription" className="text-red-500 text-sm mb-2 italic" />
                             <label className="flex flex-col">
-                                Project Source Code URL (ex. to github or gitlab)
+                                <p>
+                                    Project Source Code URL <span className="text-sm">(ex. to the project's Git repository)</span>
+                                </p>
                                 <Field
                                     name="projectSourceCodeURL"
                                     placeholder="Project Source Code URL"
@@ -148,7 +158,9 @@ export default () => {
                             <ErrorMessage component="span" name="projectURL" className="text-red-500 text-sm mb-2 italic" />
 
                             <label className="flex flex-col">
-                                Programming Languages (select at least one)
+                                <p>
+                                    Programming Languages <span className="text-sm"> (select at least one)</span>
+                                </p>
                                 <Field
                                     component={Select}
                                     isMulti={true}
