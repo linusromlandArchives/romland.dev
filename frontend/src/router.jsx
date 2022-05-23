@@ -9,9 +9,13 @@ export default function () {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="about" element={<About />} />
+                <Route path="about" element={<About />} onLeave={test} />
                 <Route path="admin" element={<Admin />} />
             </Routes>
         </BrowserRouter>
     );
+
+    function test() {
+        console.log('test');
+    }
 }
