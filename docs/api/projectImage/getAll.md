@@ -4,7 +4,7 @@
 
 Used to retrieve one project image.
 
-**URL** : `/api/project/[projectImageID]`
+**URL** : `/api/projectImage/[projectImageID]`
 
 **Method** : `GET`
 
