@@ -2,6 +2,7 @@
 import Modal from 'react-modal';
 import { useState, useEffect } from 'react';
 import { Field, ErrorMessage, Form, Formik } from 'formik';
+import { Link } from 'react-router-dom';
 
 //Local dependencies import
 import axios from '../axios';
@@ -45,6 +46,9 @@ export default () => {
                 }}
             >
                 <div className="mb-4">
+                    <Link to="/" className="hover:underline mb-4 ">
+                        Go back
+                    </Link>
                     <h1 className="text-3xl font-semibold">Access limited</h1>
                     <p className="text-xl"> Please login to access this page</p>
                 </div>
