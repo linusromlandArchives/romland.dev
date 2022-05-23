@@ -1,15 +1,15 @@
 //External dependencies import
-import Modal from 'react-modal';
 import Select from 'react-select';
 import { Field, ErrorMessage, Form, Formik } from 'formik';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 //Local dependencies import
 import axios from '../axios';
-import { successNotify, errorNotify } from './Toast';
+import { successNotify, errorNotify } from '../components/Toast';
 
 export default () => {
-    const [modalIsOpen, setModal] = useState(false);
+    const navigate = useNavigate();
 
     const [languages, setLanguages] = useState([]);
 
@@ -26,35 +26,14 @@ export default () => {
                 setLanguages(formattedLanguages);
             } else {
                 errorNotify(response.error);
-                setModal(false);
             }
         })();
     }, []);
 
     return (
-        <>
-            <button onClick={() => setModal(true)}>Create project</button>
-            <Modal
-                isOpen={modalIsOpen}
-                onRequestClose={() => setModal(false)}
-                shouldCloseOnOverlayClick={true}
-                contentLabel="Create Project Modal"
-                ariaHideApp={false}
-                style={{
-                    content: {
-                        top: '50%',
-                        left: '50%',
-                        right: 'auto',
-                        bottom: 'auto',
-                        marginRight: '-50%',
-                        transform: 'translate(-50%, -50%)',
-                        border: 'none',
-                        background: '#fff',
-                        boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)',
-                    },
-                }}
-            >
-                <h1 className="mb-2 text-xl font-semibold">Create project</h1>
+        <div className="bg-slate-400 h-screen w-screen flex items-center justify-center">
+            <div className="w-full md:w-1/2 rounded-md bg-slate-200 p-4">
+                <h1 className="mb-2 text-3xl font-semibold">Create project</h1>
 
                 <Formik
                     initialValues={{
@@ -63,19 +42,22 @@ export default () => {
                         projectSourceCodeURL: '',
                         projectURL: '',
                         languageIDs: [],
+                        languageError: '',
                         created: '',
                     }}
                     onSubmit={async (values, { setErrors }) => {
                         const request = await axios.post('/api/project/', values);
                         const response = await request.data;
                         if (response.success) {
-                            setModal(false);
                             successNotify('Project created', {
                                 theme: 'colored',
                                 position: 'top-right',
                             });
+                            navigate('/admin');
                         } else {
-                            setErrors(response.errors);
+                            setErrors({
+                                created: response.error,
+                            });
                             errorNotify('Error when creating project', {
                                 theme: 'colored',
                                 position: 'top-right',
@@ -115,8 +97,8 @@ export default () => {
                             }
                         }
 
-                        if (values.languageIDs.length === 0) {
-                            errors.languageIDs = 'Please select at least one programming language';
+                        if (values.languageIDs.length <= 0) {
+                            errors.languageError = 'Please select at least one programming language';
                         }
 
                         return errors;
@@ -129,41 +111,41 @@ export default () => {
                                 <Field
                                     name="projectName"
                                     placeholder="Project name"
-                                    autocomplete="off"
+                                    autoComplete="off"
                                     className="border border-gray-200 p-2 rounded-md"
                                 />
                             </label>
-                            <ErrorMessage component="span" name="projectName" className="text-red-500 text-md mb-4 italic" />
+                            <ErrorMessage component="span" name="projectName" className="text-red-500 text-sm mb-2 italic" />
                             <label className="flex flex-col">
                                 Project description
                                 <Field
                                     name="projectDescription"
                                     placeholder="Project description"
-                                    autocomplete="off"
+                                    autoComplete="off"
                                     className="border border-gray-200 p-2 rounded-md"
                                 />
                             </label>
-                            <ErrorMessage component="span" name="projectDescription" className="text-red-500 text-md mb-4 italic" />
+                            <ErrorMessage component="span" name="projectDescription" className="text-red-500 text-sm mb-2 italic" />
                             <label className="flex flex-col">
                                 Project Source Code URL (ex. to github or gitlab)
                                 <Field
                                     name="projectSourceCodeURL"
                                     placeholder="Project Source Code URL"
-                                    autocomplete="off"
+                                    autoComplete="off"
                                     className="border border-gray-200 p-2 rounded-md"
                                 />
                             </label>
-                            <ErrorMessage component="span" name="projectSourceCodeURL" className="text-red-500 text-md mb-4 italic" />
+                            <ErrorMessage component="span" name="projectSourceCodeURL" className="text-red-500 text-sm mb-2 italic" />
                             <label className="flex flex-col">
                                 Project URL (ex. to demo)
                                 <Field
                                     name="projectURL"
                                     placeholder="Project URL"
-                                    autocomplete="off"
+                                    autoComplete="off"
                                     className="border border-gray-200 p-2 rounded-md"
                                 />
                             </label>
-                            <ErrorMessage component="span" name="projectURL" className="text-red-500 text-md mb-4 italic" />
+                            <ErrorMessage component="span" name="projectURL" className="text-red-500 text-sm mb-2 italic" />
 
                             <label className="flex flex-col">
                                 Programming Languages (select at least one)
@@ -178,10 +160,9 @@ export default () => {
                                         )
                                     }
                                     name="languageIDs"
-                                    className="border border-gray-200 p-2 rounded-md"
                                 />
                             </label>
-                            <ErrorMessage component="span" name="languageIDs" className="text-red-500 text-md mb-4 italic" />
+                            <ErrorMessage component="span" name="languageError" className="text-red-500 text-sm mb-2 italic" />
 
                             <ErrorMessage component="span" name="created" className="text-red-500 text-md mt-4 italic" />
                             <input
@@ -193,7 +174,7 @@ export default () => {
                         </Form>
                     )}
                 </Formik>
-            </Modal>
-        </>
+            </div>
+        </div>
     );
 };

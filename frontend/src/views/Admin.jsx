@@ -2,7 +2,6 @@
 import { useState } from 'react';
 
 //Local dependencies import
-import LoginModal from '../components/LoginModal';
 import ProjectsTab from '../components/ProjectsTab';
 import LanguagesTab from '../components/LanguagesTab';
 
@@ -11,7 +10,6 @@ export default function () {
 
     return (
         <>
-            <LoginModal />
             <nav>
                 <ul>
                     <li>

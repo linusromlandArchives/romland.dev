@@ -4,7 +4,6 @@ import { MdClose, MdEdit } from 'react-icons/md';
 
 //Local dependencies import
 import axios from '../axios';
-import CreateProject from './CreateProjectModal';
 
 export default () => {
     const [data, setData] = useState([]);
@@ -20,7 +19,6 @@ export default () => {
     return (
         <section className="w-full md:w-1/2">
             <h1 className="text-2xl font-semibold">Projects</h1>
-            <CreateProject />
             <ul>
                 {data.map((project) => (
                     <li key={project.projectID} className="my-4 p-4 rounded-md bg-zinc-200  flex items-center justify-between">
