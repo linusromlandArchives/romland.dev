@@ -89,7 +89,7 @@ export default () => {
                         <Form className="flex flex-col">
                             <label className="flex flex-col">
                                 Username
-                                <Field name="username" placeholder="Username" className="border border-gray-200 p-2 rounded-md" />
+                                <Field name="username" placeholder="Username" className="border border-gray-200 p-2 rounded-md" autoFocus />
                             </label>
                             <ErrorMessage component="span" name="username" className="text-red-500 text-md mb-4 italic" />
                             <label className="flex flex-col">

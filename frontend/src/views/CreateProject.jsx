@@ -32,7 +32,7 @@ export default () => {
     }, []);
 
     return (
-        <div className="bg-slate-400 min-h-screen w-screen flex items-center justify-center">
+        <div className="bg-teal-700 min-h-screen w-screen flex items-center justify-center">
             <div className="w-full md:w-1/2 rounded-md bg-slate-200 p-4">
                 <div className="flex justify-between items-center">
                     <h1 className="text-4xl font-semibold">Create project</h1>
@@ -121,6 +121,7 @@ export default () => {
                                     placeholder="Project name"
                                     autoComplete="off"
                                     className="border border-gray-200 p-2 rounded-md"
+                                    autoFocus
                                 />
                             </label>
                             <ErrorMessage component="span" name="projectName" className="text-red-500 text-sm mb-2 italic" />
@@ -136,7 +137,7 @@ export default () => {
                             <ErrorMessage component="span" name="projectDescription" className="text-red-500 text-sm mb-2 italic" />
                             <label className="flex flex-col">
                                 <p>
-                                    Project Source Code URL <span className="text-sm">(ex. to the project's Git repository)</span>
+                                    Project Source Code URL <span className="text-sm">(ex. to the project&#39;s Git repository)</span>
                                 </p>
                                 <Field
                                     name="projectSourceCodeURL"
