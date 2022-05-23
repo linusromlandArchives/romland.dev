@@ -2,20 +2,57 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MdClose, MdEdit } from 'react-icons/md';
+import { toast } from 'react-toastify';
 
 //Local dependencies import
 import axios from '../axios';
+import { successNotify, infoNotify, errorNotify } from '../components/Toast';
 
 export default () => {
     const [data, setData] = useState([]);
+    const [deleteProjectID, setDeleteProject] = useState('');
+    const [deleteToastID, setDeleteToastID] = useState('');
 
     useEffect(() => {
-        (async () => {
-            const request = await axios.get('/api/project/');
-            const response = await request.data;
-            setData(response.data);
-        })();
+        getData();
     }, []);
+
+    async function getData() {
+        const request = await axios.get('/api/project/');
+        const response = await request.data;
+        setData(response.data);
+    }
+
+    async function deleteProject(projectID) {
+        if (projectID == deleteProjectID) {
+            setDeleteProject('');
+            toast.dismiss(deleteToastID);
+            const request = await axios.delete('/api/project', { data: { projectID } });
+            const response = await request.data;
+            if (response.success) {
+                successNotify('Project deleted successfully', {
+                    theme: 'colored',
+                });
+                getData();
+            } else {
+                errorNotify('Project deletion failed', {
+                    theme: 'colored',
+                });
+            }
+        } else {
+            toast.dismiss(deleteToastID);
+            setDeleteToastID(
+                infoNotify('Click again to delete project', {
+                    duration: 3000,
+                    theme: 'colored',
+                }),
+            );
+            setDeleteProject(projectID);
+            setTimeout(() => {
+                setDeleteProject('');
+            }, 3000);
+        }
+    }
 
     return (
         <section className="w-full md:w-1/2 rounded-md bg-slate-200 p-4">
@@ -37,7 +74,11 @@ export default () => {
                         <h2 className="text-lg font-semibold">{project.projectName}</h2>
                         <div className="flex">
                             <MdEdit size="45px" className="m-1 p-2 rounded-md hover:border border-slate-500  cursor-pointer" />
-                            <MdClose size="45px" className="m-1 p-2 rounded-md hover:border border-slate-500  cursor-pointer" />
+                            <MdClose
+                                size="45px"
+                                className="m-1 p-2 rounded-md hover:border border-slate-500  cursor-pointer"
+                                onClick={() => deleteProject(project.projectID)}
+                            />
                         </div>
                     </li>
                 ))}
