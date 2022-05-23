@@ -38,7 +38,7 @@ export default () => {
                 isOpen={modalIsOpen}
                 onRequestClose={() => setModal(false)}
                 shouldCloseOnOverlayClick={true}
-                contentLabel="Login Modal"
+                contentLabel="Create Project Modal"
                 ariaHideApp={false}
                 style={{
                     content: {
@@ -126,7 +126,12 @@ export default () => {
                         <Form className="flex flex-col">
                             <label className="flex flex-col">
                                 Project name
-                                <Field name="projectName" placeholder="Project name" className="border border-gray-200 p-2 rounded-md" />
+                                <Field
+                                    name="projectName"
+                                    placeholder="Project name"
+                                    autocomplete="off"
+                                    className="border border-gray-200 p-2 rounded-md"
+                                />
                             </label>
                             <ErrorMessage component="span" name="projectName" className="text-red-500 text-md mb-4 italic" />
                             <label className="flex flex-col">
@@ -134,6 +139,7 @@ export default () => {
                                 <Field
                                     name="projectDescription"
                                     placeholder="Project description"
+                                    autocomplete="off"
                                     className="border border-gray-200 p-2 rounded-md"
                                 />
                             </label>
@@ -143,13 +149,19 @@ export default () => {
                                 <Field
                                     name="projectSourceCodeURL"
                                     placeholder="Project Source Code URL"
+                                    autocomplete="off"
                                     className="border border-gray-200 p-2 rounded-md"
                                 />
                             </label>
                             <ErrorMessage component="span" name="projectSourceCodeURL" className="text-red-500 text-md mb-4 italic" />
                             <label className="flex flex-col">
                                 Project URL (ex. to demo)
-                                <Field name="projectURL" placeholder="Project URL" className="border border-gray-200 p-2 rounded-md" />
+                                <Field
+                                    name="projectURL"
+                                    placeholder="Project URL"
+                                    autocomplete="off"
+                                    className="border border-gray-200 p-2 rounded-md"
+                                />
                             </label>
                             <ErrorMessage component="span" name="projectURL" className="text-red-500 text-md mb-4 italic" />
 

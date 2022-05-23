@@ -4,7 +4,7 @@ import { MdClose, MdEdit } from 'react-icons/md';
 
 //Local dependencies import
 import axios from '../axios';
-import CreateProject from './CreateProject';
+import CreateProject from './CreateProjectModal';
 
 export default () => {
     const [data, setData] = useState([]);
