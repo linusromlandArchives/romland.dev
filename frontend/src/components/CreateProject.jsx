@@ -1,7 +1,8 @@
 //External dependencies import
 import Modal from 'react-modal';
+import Select from 'react-select';
 import { Field, ErrorMessage, Form, Formik } from 'formik';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 //Local dependencies import
 import axios from '../axios';
@@ -9,6 +10,26 @@ import { successNotify, errorNotify } from './Toast';
 
 export default () => {
     const [modalIsOpen, setModal] = useState(false);
+
+    const [languages, setLanguages] = useState([]);
+
+    useEffect(() => {
+        (async () => {
+            const request = await axios.get('/api/programmingLanguage/');
+            const response = await request.data;
+            if (response.success) {
+                const formattedLanguages = response.data.map((language) => ({
+                    value: language.programmingLanguageID,
+                    label: language.programmingLanguageName,
+                }));
+
+                setLanguages(formattedLanguages);
+            } else {
+                errorNotify(response.error);
+                setModal(false);
+            }
+        })();
+    }, []);
 
     return (
         <>
@@ -36,7 +57,14 @@ export default () => {
                 <h1 className="mb-2 text-xl font-semibold">Create project</h1>
 
                 <Formik
-                    initialValues={{ projectName: '', projectDescription: '', projectSourceCodeURL: '', projectURL: '', created: '' }}
+                    initialValues={{
+                        projectName: '',
+                        projectDescription: '',
+                        projectSourceCodeURL: '',
+                        projectURL: '',
+                        languageIDs: [],
+                        created: '',
+                    }}
                     onSubmit={async (values, { setErrors }) => {
                         const request = await axios.post('/api/project/', values);
                         const response = await request.data;
@@ -87,10 +115,14 @@ export default () => {
                             }
                         }
 
+                        if (values.languageIDs.length === 0) {
+                            errors.languageIDs = 'Please select at least one programming language';
+                        }
+
                         return errors;
                     }}
                 >
-                    {({ dirty, isValid }) => (
+                    {({ setFieldValue, dirty, isValid }) => (
                         <Form className="flex flex-col">
                             <label className="flex flex-col">
                                 Project name
@@ -120,6 +152,24 @@ export default () => {
                                 <Field name="projectURL" placeholder="Project URL" className="border border-gray-200 p-2 rounded-md" />
                             </label>
                             <ErrorMessage component="span" name="projectURL" className="text-red-500 text-md mb-4 italic" />
+
+                            <label className="flex flex-col">
+                                Programming Languages (select at least one)
+                                <Field
+                                    component={Select}
+                                    isMulti={true}
+                                    options={languages}
+                                    onChange={(value) =>
+                                        setFieldValue(
+                                            'languageIDs',
+                                            value.map((language) => language.value),
+                                        )
+                                    }
+                                    name="languageIDs"
+                                    className="border border-gray-200 p-2 rounded-md"
+                                />
+                            </label>
+                            <ErrorMessage component="span" name="languageIDs" className="text-red-500 text-md mb-4 italic" />
 
                             <ErrorMessage component="span" name="created" className="text-red-500 text-md mt-4 italic" />
                             <input
