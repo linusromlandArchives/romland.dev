@@ -9,7 +9,7 @@ export default function () {
     const [activeTab, changeTab] = useState('projects');
 
     return (
-        <div className="bg-emerald-800 min-h-screen w-screen">
+        <div className="bg-cyan-800 min-h-screen w-screen">
             <nav>
                 <ul>
                     <li>

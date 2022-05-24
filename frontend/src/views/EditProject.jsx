@@ -111,7 +111,7 @@ export default () => {
     }
 
     return (
-        <div className="bg-emerald-800 min-h-screen w-screen flex items-center justify-center">
+        <div className="bg-cyan-800 min-h-screen w-screen flex items-center justify-center">
             <div className="w-full lg:w-8/12 rounded-md bg-slate-200 p-8">
                 <div className="flex justify-between items-center">
                     <h1 className="text-4xl font-semibold">Edit a project</h1>
