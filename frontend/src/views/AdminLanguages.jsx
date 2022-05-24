@@ -67,7 +67,7 @@ export default () => {
                 <div className="flex justify-between items-center">
                     <h1 className="text-4xl font-semibold">Programming Languages</h1>
                     <Link
-                        to="/admin/createLanguage"
+                        to="/admin/language/create"
                         className="text-black bg-slate-300 hover:bg-slate-200 border-slate-500 border rounded-md p-2 transition duration-150 ease"
                     >
                         Create a new Language
