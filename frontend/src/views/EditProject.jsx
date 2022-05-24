@@ -79,7 +79,7 @@ export default () => {
     }
 
     async function getProject() {
-        const request = await axios.get(`/api/project/`, { body: { ids: projectID } });
+        const request = await axios.get(`/api/project/`, { params: { ids: projectID } });
         const response = await request.data;
         if (response.success) {
             if (response.data[0].programmingLanguages) {
@@ -113,7 +113,7 @@ export default () => {
     return (
         <div className="w-full flex justify-center">
             <div className="w-full lg:w-8/12 rounded-md bg-slate-200 p-8 mt-6">
-                <div className="flex justify-between items-center">
+                <div className="flex justify-between items-center mb-4">
                     <h1 className="text-4xl font-semibold">Edit a project</h1>
                     <Link
                         to="/admin/project"

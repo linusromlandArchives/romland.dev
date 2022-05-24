@@ -6,6 +6,7 @@ import AdminLanguages from './AdminLanguages';
 import CreateProject from './CreateProject';
 import CreateLanguage from './CreateLanguage';
 import EditProject from './EditProject';
+import EditLanguage from './EditLanguage';
 
 //Export all views
-export { Home, Admin, AdminProjects, CreateProject, CreateLanguage, EditProject, AdminLanguages };
+export { Home, Admin, AdminProjects, AdminLanguages, CreateProject, CreateLanguage, EditProject, EditLanguage };

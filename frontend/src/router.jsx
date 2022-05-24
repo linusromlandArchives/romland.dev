@@ -2,7 +2,7 @@
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 
 //Views import
-import { Home, Admin, AdminProjects, CreateProject, CreateLanguage, EditProject, AdminLanguages } from './views';
+import { Home, Admin, AdminProjects, AdminLanguages, CreateProject, CreateLanguage, EditProject, EditLanguage } from './views';
 
 export default function () {
     return (
@@ -50,6 +50,14 @@ export default function () {
                             element={
                                 <Admin>
                                     <CreateLanguage />
+                                </Admin>
+                            }
+                        />
+                        <Route
+                            path="edit/:languageID"
+                            element={
+                                <Admin>
+                                    <EditLanguage />
                                 </Admin>
                             }
                         />

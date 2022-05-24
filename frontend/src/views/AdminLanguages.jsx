@@ -79,12 +79,19 @@ export default () => {
                             key={language.programmingLanguageID}
                             className="my-4 p-4 rounded-md bg-slate-300 border-slate-500 border flex items-center justify-between"
                         >
-                            <h2 className="text-lg font-semibold">{language.programmingLanguageName}</h2>
+                            <div className="flex items-center">
+                                <img
+                                    className="h-12 w-12 object-scale-down bg-slate-100 rounded-lg"
+                                    src={language.programmingLanguageIcon}
+                                    alt={language.name + ' Icon'}
+                                />
+                                <h2 className="ml-4 text-lg font-semibold ">{language.programmingLanguageName}</h2>
+                            </div>
                             <div className="flex">
                                 <MdEdit
                                     size="45px"
                                     className="m-1 p-2 rounded-md hover:border border-slate-500  cursor-pointer"
-                                    onClick={() => navigate(`/admin/editLanguage/${language.programmingLanguageID}`)}
+                                    onClick={() => navigate(`/admin/language/edit/${language.programmingLanguageID}`)}
                                 />
                                 <MdClose
                                     size="45px"

@@ -13,7 +13,7 @@ export default () => {
     return (
         <div className="w-full flex justify-center">
             <div className="w-full md:w-1/2 rounded-md bg-slate-200 p-8 mt-6">
-                <div className="flex justify-between items-center">
+                <div className="flex justify-between items-center mb-4">
                     <h1 className="text-4xl font-semibold">Create programming language</h1>
                     <Link
                         to="/admin/language"
