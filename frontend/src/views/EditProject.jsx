@@ -111,8 +111,8 @@ export default () => {
     }
 
     return (
-        <div className="bg-teal-700 min-h-screen w-screen flex items-center justify-center">
-            <div className="w-full lg:w-1/2 rounded-md bg-slate-200 p-8">
+        <div className="bg-emerald-800 min-h-screen w-screen flex items-center justify-center">
+            <div className="w-full lg:w-8/12 rounded-md bg-slate-200 p-8">
                 <div className="flex justify-between items-center">
                     <h1 className="text-4xl font-semibold">Edit a project</h1>
                     <Link
@@ -200,7 +200,7 @@ export default () => {
                         }}
                     >
                         {({ values, setFieldValue, isValid }) => (
-                            <Form className="flex flex-col w-full md:w-1/2 mr-0 md:mr-6 mt-4 md:mt-0">
+                            <Form className="flex flex-col w-full lg:w-1/2 mr-0 md:mr-6 mt-4 md:mt-0">
                                 <label className="flex flex-col">
                                     Project name
                                     <Field
@@ -273,7 +273,7 @@ export default () => {
                             </Form>
                         )}
                     </Formik>
-                    <div className="w-full md:w-1/2 ml-0 md:ml-6">
+                    <div className="w-full lg:w-1/2 ml-0 md:ml-6">
                         <button
                             className="bg-blue-500 hover:bg-blue-400 disabled:bg-blue-300 m-2 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition ease duration-150 cursor-pointer disabled:cursor-not-allowed"
                             onClick={() => {
@@ -284,7 +284,7 @@ export default () => {
                         </button>
                         <input type="file" accept="image/*" className="hidden" ref={uploadInput} />
 
-                        <div className="flex flex-wrap">
+                        <div className="flex flex-wrap overflow-y-none md:overflow-y-scroll max-h-max md:max-h-96">
                             {project &&
                                 project.projectImages &&
                                 project.projectImages.length > 0 &&
