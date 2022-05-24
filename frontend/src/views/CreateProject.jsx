@@ -133,6 +133,7 @@ export default () => {
                                     name="projectDescription"
                                     placeholder="Project description"
                                     autoComplete="off"
+                                    as="textarea"
                                     className="border border-gray-200 p-2 rounded-md"
                                 />
                             </label>

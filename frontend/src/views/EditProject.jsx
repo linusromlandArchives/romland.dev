@@ -3,7 +3,7 @@ import Select from 'react-select';
 import { toast } from 'react-toastify';
 import { Field, ErrorMessage, Form, Formik } from 'formik';
 import { Link, useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, createRef } from 'react';
 
 //Local dependencies import
 import axios from '../axios';
@@ -17,11 +17,31 @@ export default () => {
     const [project, setProject] = useState({});
     const [deleteImageID, setDeleteImageID] = useState('');
     const [deleteToastID, setDeleteToastID] = useState('');
+    const uploadInput = createRef();
 
     useEffect(() => {
         getLanguages();
         getProject();
+
+        uploadInput.current.addEventListener('change', handleFileUpload);
     }, []);
+
+    async function handleFileUpload(e) {
+        const formData = new FormData();
+        formData.append('file', e.target.files[0]);
+        const request = await axios.post('/api/projectImage/' + projectID, formData);
+        const response = await request.data;
+        if (response.success) {
+            successNotify('Image uploaded successfully', {
+                theme: 'colored',
+            });
+            getProject();
+        } else {
+            errorNotify('Image upload failed', {
+                theme: 'colored',
+            });
+        }
+    }
 
     async function deleteProjectImage(projectImagesID) {
         if (deleteImageID == projectImagesID) {
@@ -194,6 +214,7 @@ export default () => {
                                         name="projectDescription"
                                         placeholder="Project description"
                                         autoComplete="off"
+                                        as="textarea"
                                         className="border border-gray-200 p-2 rounded-md"
                                     />
                                 </label>
@@ -249,9 +270,15 @@ export default () => {
                         )}
                     </Formik>
                     <div className="w-full md:w-1/2 ml-0 md:ml-6">
-                        <button className="bg-blue-500 hover:bg-blue-400 disabled:bg-blue-300 m-2 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition ease duration-150 cursor-pointer disabled:cursor-not-allowed">
+                        <button
+                            className="bg-blue-500 hover:bg-blue-400 disabled:bg-blue-300 m-2 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition ease duration-150 cursor-pointer disabled:cursor-not-allowed"
+                            onClick={() => {
+                                uploadInput.current.click();
+                            }}
+                        >
                             Upload Image
                         </button>
+                        <input type="file" accept="image/*" className="hidden" ref={uploadInput} />
 
                         <div className="flex flex-wrap">
                             {project &&
