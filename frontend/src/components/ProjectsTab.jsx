@@ -58,7 +58,7 @@ export default () => {
     }
 
     return (
-        <section className="w-full md:w-1/2 rounded-md bg-slate-200 p-4">
+        <section className="w-full md:w-1/2 rounded-md bg-slate-200 p-8">
             <div className="flex justify-between items-center">
                 <h1 className="text-4xl font-semibold">Projects</h1>
                 <Link

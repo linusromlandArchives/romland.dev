@@ -35,7 +35,7 @@ export default () => {
 
     return (
         <div className="bg-teal-700 min-h-screen w-screen flex items-center justify-center">
-            <div className="w-full md:w-1/2 rounded-md bg-slate-200 p-4">
+            <div className="w-full md:w-1/2 rounded-md bg-slate-200 p-8">
                 <div className="flex justify-between items-center">
                     <h1 className="text-4xl font-semibold">Create project</h1>
                     <Link
