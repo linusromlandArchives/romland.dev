@@ -2,8 +2,7 @@
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 
 //Views import
-import { Home, Admin, CreateProject, EditProject } from './views';
-import LoginModal from './components/LoginModal';
+import { Home, Admin, AdminProjects, CreateProject, EditProject, AdminLanguages } from './views';
 
 export default function () {
     return (
@@ -11,33 +10,42 @@ export default function () {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="admin/">
-                    <Route
-                        index
-                        element={
-                            <>
-                                <LoginModal />
-                                <Admin />
-                            </>
-                        }
-                    />
-                    <Route
-                        path="createProject/"
-                        element={
-                            <>
-                                <LoginModal />
-                                <CreateProject />
-                            </>
-                        }
-                    />
-                    <Route
-                        path="editProject/:projectID"
-                        element={
-                            <>
-                                <LoginModal />
-                                <EditProject />
-                            </>
-                        }
-                    />
+                    <Route path="project/">
+                        <Route
+                            index
+                            element={
+                                <Admin>
+                                    <AdminProjects />
+                                </Admin>
+                            }
+                        />
+                        <Route
+                            path="create"
+                            element={
+                                <Admin>
+                                    <CreateProject />
+                                </Admin>
+                            }
+                        />
+                        <Route
+                            path="edit/:projectID"
+                            element={
+                                <Admin>
+                                    <EditProject />
+                                </Admin>
+                            }
+                        />
+                    </Route>
+                    <Route path="language/">
+                        <Route
+                            index
+                            element={
+                                <Admin>
+                                    <AdminLanguages />
+                                </Admin>
+                            }
+                        />
+                    </Route>
                 </Route>
             </Routes>
         </BrowserRouter>

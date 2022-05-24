@@ -1,29 +1,13 @@
-//External dependencies import
-import { useState } from 'react';
-
 //Local dependencies import
-import ProjectsTab from '../components/ProjectsTab';
-import LanguagesTab from '../components/LanguagesTab';
+import AdminNavbar from '../components/AdminNavbar';
 
-export default function () {
-    const [activeTab, changeTab] = useState('projects');
+export default function (props) {
+    const { children } = props;
 
     return (
         <div className="bg-cyan-800 min-h-screen w-screen">
-            <nav>
-                <ul>
-                    <li>
-                        <button onClick={() => changeTab('projects')}>Projects</button>
-                    </li>
-                    <li>
-                        <button onClick={() => changeTab('languages')}>Languages</button>
-                    </li>
-                </ul>
-            </nav>
-            <div className="w-full flex justify-center">
-                {activeTab === 'projects' && <ProjectsTab />}
-                {activeTab === 'languages' && <LanguagesTab />}
-            </div>
+            <AdminNavbar />
+            {children}
         </div>
     );
 }
