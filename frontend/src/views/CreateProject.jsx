@@ -15,21 +15,23 @@ export default () => {
     const [languages, setLanguages] = useState([]);
 
     useEffect(() => {
-        (async () => {
-            const request = await axios.get('/api/programmingLanguage/');
-            const response = await request.data;
-            if (response.success) {
-                const formattedLanguages = response.data.map((language) => ({
-                    value: language.programmingLanguageID,
-                    label: language.programmingLanguageName,
-                }));
-
-                setLanguages(formattedLanguages);
-            } else {
-                errorNotify(response.error);
-            }
-        })();
+        getLanguages();
     }, []);
+
+    async function getLanguages() {
+        const request = await axios.get('/api/programmingLanguage/');
+        const response = await request.data;
+        if (response.success) {
+            const formattedLanguages = response.data.map((language) => ({
+                value: language.programmingLanguageID,
+                label: language.programmingLanguageName,
+            }));
+
+            setLanguages(formattedLanguages);
+        } else {
+            errorNotify(response.error);
+        }
+    }
 
     return (
         <div className="bg-teal-700 min-h-screen w-screen flex items-center justify-center">

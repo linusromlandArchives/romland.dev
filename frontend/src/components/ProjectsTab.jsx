@@ -1,6 +1,6 @@
 //External dependencies import
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { MdClose, MdEdit } from 'react-icons/md';
 import { toast } from 'react-toastify';
 
@@ -9,6 +9,9 @@ import axios from '../axios';
 import { successNotify, infoNotify, errorNotify } from '../components/Toast';
 
 export default () => {
+    //Initialize the react-router navigator
+    const navigate = useNavigate();
+
     const [data, setData] = useState([]);
     const [deleteProjectID, setDeleteProject] = useState('');
     const [deleteToastID, setDeleteToastID] = useState('');
@@ -73,7 +76,11 @@ export default () => {
                     >
                         <h2 className="text-lg font-semibold">{project.projectName}</h2>
                         <div className="flex">
-                            <MdEdit size="45px" className="m-1 p-2 rounded-md hover:border border-slate-500  cursor-pointer" />
+                            <MdEdit
+                                size="45px"
+                                className="m-1 p-2 rounded-md hover:border border-slate-500  cursor-pointer"
+                                onClick={() => navigate(`/admin/editProject/${project.projectID}`)}
+                            />
                             <MdClose
                                 size="45px"
                                 className="m-1 p-2 rounded-md hover:border border-slate-500  cursor-pointer"
