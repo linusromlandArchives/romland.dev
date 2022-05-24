@@ -65,6 +65,10 @@ export default () => {
                 infoNotify('Click again to delete image', {
                     duration: 3000,
                     theme: 'colored',
+                    pauseOnHover: false,
+                    pauseOnFocusLoss: false,
+                    closeOnClick: false,
+                    closeButton: false,
                 }),
             );
             setDeleteImageID(projectImagesID);
