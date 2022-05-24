@@ -12,6 +12,8 @@ export default () => {
     const { projectID } = useParams();
 
     const [languages, setLanguages] = useState([]);
+    const [activeLanguages, setActiveLanguages] = useState([]);
+    const [project, setProject] = useState({});
 
     useEffect(() => {
         getLanguages();
@@ -27,6 +29,8 @@ export default () => {
                     value: language.programmingLanguageID,
                     label: language.programmingLanguageName,
                 }));
+                setActiveLanguages(formattedLanguages);
+                setProject(response.data[0]);
             }
         } else {
             errorNotify(response.error);
@@ -64,18 +68,22 @@ export default () => {
                     <Formik
                         enableReinitialize={true}
                         initialValues={{
-                            projectName: 'pucko',
-                            projectDescription: '',
-                            projectSourceCodeURL: '',
-                            projectURL: '',
-                            languageIDs: [],
+                            projectName: project.projectName || '',
+                            projectDescription: project.projectDescription || '',
+                            projectSourceCodeURL: project.projectSourceCodeURL || '',
+                            projectURL: project.projectURL || '',
+                            languageIDs: activeLanguages || [],
                             languageError: '',
                             updated: '',
                         }}
                         onSubmit={async (values, { setErrors }) => {
                             const request = await axios.put('/api/project/', {
                                 projectID,
-                                ...values,
+                                projectName: values.projectName,
+                                projectDescription: values.projectDescription,
+                                projectSourceCodeURL: values.projectSourceCodeURL,
+                                projectURL: values.projectURL,
+                                languageIDs: values.languageIDs.map((language) => language.value),
                             });
                             const response = await request.data;
                             if (response.success) {
@@ -188,10 +196,7 @@ export default () => {
                                         isMulti={true}
                                         options={languages}
                                         onChange={(value) => {
-                                            setFieldValue(
-                                                'languageIDs',
-                                                value.map((language) => language.value),
-                                            );
+                                            setFieldValue('languageIDs', value);
                                         }}
                                         value={values.languageIDs}
                                         name="languageIDs"
