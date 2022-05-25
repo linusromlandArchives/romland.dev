@@ -1,5 +1,5 @@
 //External dependencies import
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import { Routes, Route, Navigate, BrowserRouter } from 'react-router-dom';
 
 //Views import
 import { Home, Admin, AdminProjects, AdminLanguages, CreateProject, CreateLanguage, EditProject, EditLanguage } from './views';
@@ -10,6 +10,7 @@ export default function () {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="admin/">
+                    <Route index element={<Navigate to="project" />} />
                     <Route path="project/">
                         <Route
                             index
