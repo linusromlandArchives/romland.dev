@@ -27,6 +27,20 @@ const project = sequelize.define('project', {
         type: DataTypes.STRING,
         allowNull: false,
     },
+    projectVisible: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+    },
+    projectFeatured: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+    },
+});
+
+project.addHook('afterUpdate', async (project: any) => {
+    if (project.changed('projectVisible') && project.projectVisible) project.projectFeatured = false;
 });
 
 export default project;

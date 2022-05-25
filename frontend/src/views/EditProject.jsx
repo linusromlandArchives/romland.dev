@@ -2,7 +2,7 @@
 import Select from 'react-select';
 import { toast } from 'react-toastify';
 import { Field, ErrorMessage, Form, Formik } from 'formik';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useState, useEffect, createRef } from 'react';
 
 //Local dependencies import
@@ -10,6 +10,7 @@ import axios from '../axios';
 import { successNotify, infoNotify, errorNotify } from '../components/Toast';
 
 export default () => {
+    const navigate = useNavigate();
     const { projectID } = useParams();
 
     const [languages, setLanguages] = useState([]);
@@ -72,6 +73,8 @@ export default () => {
         const request = await axios.get(`/api/project/`, { params: { ids: projectID } });
         const response = await request.data;
         if (response.success) {
+            if (response.data.length <= 0) navigate('/admin/project');
+
             if (response.data[0].programmingLanguages) {
                 const formattedLanguages = response.data[0].programmingLanguages.map((language) => ({
                     value: language.programmingLanguageID,
@@ -120,6 +123,8 @@ export default () => {
                             projectDescription: project.projectDescription || '',
                             projectSourceCodeURL: project.projectSourceCodeURL || '',
                             projectURL: project.projectURL || '',
+                            projectVisible: project.projectVisible || false,
+                            projectFeatured: project.projectFeatured || false,
                             languageIDs: activeLanguages || [],
                             languageError: '',
                             updated: '',
@@ -131,11 +136,14 @@ export default () => {
                                 projectDescription: values.projectDescription,
                                 projectSourceCodeURL: values.projectSourceCodeURL,
                                 projectURL: values.projectURL,
+                                projectVisible: values.projectVisible,
+                                projectFeatured: values.projectFeatured,
                                 languageIDs: values.languageIDs.map((language) => language.value),
                             });
                             const response = await request.data;
                             if (response.success) {
                                 successNotify('Project updated');
+                                getProject();
                             } else {
                                 setErrors({
                                     updated: response.error,
@@ -246,6 +254,25 @@ export default () => {
                                     />
                                 </label>
                                 <ErrorMessage component="span" name="languageError" className="text-red-500 text-sm mb-2 italic" />
+
+                                <div className="flex">
+                                    <label className="flex items-center">
+                                        <p>Visible</p>
+                                        <Field
+                                            name="projectVisible"
+                                            type="checkbox"
+                                            className="ml-2 border border-gray-200 p-2 rounded-md"
+                                        />
+                                    </label>
+                                    <label className="flex items-center ml-6">
+                                        <p>Featured</p>
+                                        <Field
+                                            name="projectFeatured"
+                                            type="checkbox"
+                                            className="ml-2 border border-gray-200 p-2 rounded-md"
+                                        />
+                                    </label>
+                                </div>
 
                                 <ErrorMessage component="span" name="created" className="text-red-500 text-md mt-4 italic" />
                                 <input

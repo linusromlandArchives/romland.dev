@@ -1,6 +1,6 @@
 //External dependencies import
 import { Field, ErrorMessage, Form, Formik } from 'formik';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 //Local dependencies import
@@ -8,6 +8,7 @@ import axios from '../axios';
 import { successNotify, errorNotify } from '../components/Toast';
 
 export default () => {
+    const navigate = useNavigate();
     const { languageID } = useParams();
 
     const [language, setLanguage] = useState({});
@@ -20,7 +21,8 @@ export default () => {
         const request = await axios.get(`/api/programmingLanguage/`, { params: { ids: languageID } });
         const response = await request.data;
         if (response.success) {
-            console.log(response.data);
+            if (response.data.length <= 0) navigate('/admin/language');
+
             setLanguage(response.data[0]);
         } else {
             errorNotify(response.error);

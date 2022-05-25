@@ -126,11 +126,13 @@ router.put('/', checkAdmin, async (req: Request, res: Response) => {
         !req.body.projectDescription &&
         !req.body.projectSourceCodeURL &&
         !req.body.projectURL &&
+        !req.body.projectVisible &&
+        !req.body.projectFeatured &&
         !req.body.languageIDs
     ) {
         return res.status(400).json({
             success: false,
-            error: 'Please provide a valid projectName, projectDescription, projectSourceCodeURL, projectURL or languageIDs',
+            error: 'Please provide a valid projectName, projectDescription, projectSourceCodeURL, projectURL, projectVisible, projectFeatured or languageIDs',
         });
     }
 
@@ -140,6 +142,8 @@ router.put('/', checkAdmin, async (req: Request, res: Response) => {
             projectDescription: req.body.projectDescription,
             projectSourceCodeURL: req.body.projectSourceCodeURL,
             projectURL: req.body.projectURL,
+            projectVisible: req.body.projectVisible,
+            projectFeatured: req.body.projectFeatured,
         });
 
         await foundProject.setProgrammingLanguages(
