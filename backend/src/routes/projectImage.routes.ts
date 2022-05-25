@@ -11,6 +11,20 @@ import { checkAdmin } from '../auth';
 const router = Router();
 
 /**
+ * @api {get} /api/noImage/ Send the noImage image
+ */
+router.get('/noImage', async (req: Request, res: Response) => {
+    try {
+        res.status(200).sendFile(path.join(path.resolve(), 'src/public/noImage.jpg'));
+    } catch (error: any) {
+        res.status(500).json({
+            success: false,
+            error: error.message,
+        });
+    }
+});
+
+/**
  * @api {get} /api/projectImage/ Send the projectImage with the specified id
  */
 router.get('/:id', async (req: Request, res: Response) => {

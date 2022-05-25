@@ -11,6 +11,8 @@ export default (props) => {
     useEffect(() => {
         if (project && project.projectImages && project.projectImages.length > 0) {
             setImage('/api/projectImage/' + project.projectImages[0].projectImagesID);
+        } else {
+            setImage('/api/projectImage/noImage');
         }
     }, [project]);
 
