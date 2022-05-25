@@ -16,6 +16,9 @@ router.get('/', async (req: Request, res: Response) => {
     const ids = req.query.ids as string;
     const languageIDs = req.query.languageIDs as string;
     const projectName = req.query.projectName as string;
+    const visible = req.query.visible as string;
+    const limit = req.query.limit as string;
+    const featured = req.query.featured as string;
 
     const conditions = {} as any;
     const associationsConditions = [];
@@ -26,6 +29,14 @@ router.get('/', async (req: Request, res: Response) => {
 
     if (projectName) {
         conditions.projectName = { [Op.substring]: projectName };
+    }
+
+    if (visible) {
+        conditions.projectVisible = visible == 'true' ? true : false;
+    }
+
+    if (featured) {
+        conditions.projectFeatured = featured == 'true' ? true : false;
     }
 
     if (languageIDs) {
@@ -41,6 +52,7 @@ router.get('/', async (req: Request, res: Response) => {
         const projects = await project.findAll({
             where: conditions,
             include: [projectImages, programmingLanguage, ...associationsConditions],
+            limit: limit ? parseInt(limit) : undefined,
         });
         res.json({
             success: true,
