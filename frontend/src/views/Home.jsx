@@ -1,5 +1,6 @@
 //External dependencies import
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 //Local dependencies import
 import axios from '../axios';
@@ -7,7 +8,9 @@ import { errorNotify } from '../components/Toast';
 import FeaturedCard from '../components/FeaturedCard';
 
 export default function () {
+    const navigate = useNavigate();
     const [data, setData] = useState([]);
+    const [search, setSearch] = useState('');
 
     useEffect(() => {
         getData();
@@ -29,12 +32,17 @@ export default function () {
         }
     }
 
+    function navigateToSearch(event) {
+        event.preventDefault();
+        navigate('/search/' + search);
+    }
+
     return (
         <div className="bg-cyan-900 min-h-screen w-screen flex flex-col items-center justify-center">
             <div className="w-10/12 lg:w-7/12 flex flex-col items-center">
                 <h1 className="text-5xl sm:text-6xl font-semibold text-white mt-4">Romland.dev</h1>
 
-                <form className="w-full md:w-8/12 mt-4 p-2">
+                <form className="w-full md:w-8/12 mt-4 p-2" onSubmit={navigateToSearch}>
                     <div className="relative text-gray-600 ">
                         <span className="absolute inset-y-0 left-0 flex items-center pl-2">
                             <button type="submit" className="p-1 focus:outline-none focus:shadow-outline">
@@ -57,6 +65,8 @@ export default function () {
                             className="w-full py-3 text-sm text-black bg-gray-200 rounded-md pl-10 focus:outline-none "
                             placeholder="Search..."
                             autoComplete="off"
+                            value={search}
+                            onChange={(event) => setSearch(event.target.value)}
                         />
                     </div>
                 </form>
