@@ -59,19 +59,13 @@ export default () => {
                         const request = await axios.post('/api/project/', values);
                         const response = await request.data;
                         if (response.success) {
-                            successNotify('Project created', {
-                                theme: 'colored',
-                                position: 'top-right',
-                            });
+                            successNotify('Project created');
                             navigate('/admin/project');
                         } else {
                             setErrors({
                                 created: response.error,
                             });
-                            errorNotify('Error when creating project', {
-                                theme: 'colored',
-                                position: 'top-right',
-                            });
+                            errorNotify('Error when creating project');
                         }
                     }}
                     validate={(values) => {

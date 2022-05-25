@@ -33,23 +33,17 @@ export default () => {
             const request = await axios.delete('/api/project', { data: { projectID } });
             const response = await request.data;
             if (response.success) {
-                successNotify('Project deleted successfully', {
-                    theme: 'colored',
-                });
+                successNotify('Project deleted successfully');
                 getData();
             } else {
-                errorNotify('Project deletion failed', {
-                    theme: 'colored',
-                });
+                errorNotify('Project deletion failed');
             }
         } else {
             toast.dismiss(deleteToastID);
             setDeleteToastID(
                 infoNotify('Click again to delete project', {
-                    duration: 3000,
-                    theme: 'colored',
+                    autoClose: 3000,
                     pauseOnHover: false,
-                    pauseOnFocusLoss: false,
                     closeOnClick: false,
                     closeButton: false,
                 }),

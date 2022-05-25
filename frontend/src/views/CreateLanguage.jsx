@@ -34,19 +34,13 @@ export default () => {
                         const request = await axios.post('/api/programmingLanguage/', values);
                         const response = await request.data;
                         if (response.success) {
-                            successNotify('Language created', {
-                                theme: 'colored',
-                                position: 'top-right',
-                            });
+                            successNotify('Language created');
                             navigate('/admin/language');
                         } else {
                             setErrors({
                                 created: response.error,
                             });
-                            errorNotify('Error when creating language', {
-                                theme: 'colored',
-                                position: 'top-right',
-                            });
+                            errorNotify('Error when creating language');
                         }
                     }}
                     validate={(values) => {

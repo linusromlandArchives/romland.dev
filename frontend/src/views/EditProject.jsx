@@ -32,14 +32,10 @@ export default () => {
         const request = await axios.post('/api/projectImage/' + projectID, formData);
         const response = await request.data;
         if (response.success) {
-            successNotify('Image uploaded successfully', {
-                theme: 'colored',
-            });
+            successNotify('Image uploaded successfully');
             getProject();
         } else {
-            errorNotify('Image upload failed', {
-                theme: 'colored',
-            });
+            errorNotify('Image upload failed');
         }
     }
 
@@ -50,23 +46,17 @@ export default () => {
             const request = await axios.delete('/api/projectImage', { data: { projectImagesID } });
             const response = await request.data;
             if (response.success) {
-                successNotify('Image deleted successfully', {
-                    theme: 'colored',
-                });
+                successNotify('Image deleted successfully');
                 getProject();
             } else {
-                errorNotify('Image deletion failed', {
-                    theme: 'colored',
-                });
+                errorNotify('Image deletion failed');
             }
         } else {
             toast.dismiss(deleteToastID);
             setDeleteToastID(
                 infoNotify('Click again to delete image', {
-                    duration: 3000,
-                    theme: 'colored',
+                    autoClose: 3000,
                     pauseOnHover: false,
-                    pauseOnFocusLoss: false,
                     closeOnClick: false,
                     closeButton: false,
                 }),
@@ -145,18 +135,12 @@ export default () => {
                             });
                             const response = await request.data;
                             if (response.success) {
-                                successNotify('Project updated', {
-                                    theme: 'colored',
-                                    position: 'top-right',
-                                });
+                                successNotify('Project updated');
                             } else {
                                 setErrors({
                                     updated: response.error,
                                 });
-                                errorNotify('Error when updating project', {
-                                    theme: 'colored',
-                                    position: 'top-right',
-                                });
+                                errorNotify('Error when updating project');
                             }
                         }}
                         validate={(values) => {

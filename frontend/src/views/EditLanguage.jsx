@@ -55,18 +55,12 @@ export default () => {
                         });
                         const response = await request.data;
                         if (response.success) {
-                            successNotify('Language updated', {
-                                theme: 'colored',
-                                position: 'top-right',
-                            });
+                            successNotify('Language updated');
                         } else {
                             setErrors({
                                 updated: response.error,
                             });
-                            errorNotify('Error when updating language', {
-                                theme: 'colored',
-                                position: 'top-right',
-                            });
+                            errorNotify('Error when updating language');
                         }
                     }}
                     validate={(values) => {

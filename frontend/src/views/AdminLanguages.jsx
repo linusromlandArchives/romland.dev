@@ -33,23 +33,17 @@ export default () => {
             const request = await axios.delete('/api/programmingLanguage', { data: { programmingLanguageID: languageID } });
             const response = await request.data;
             if (response.success) {
-                successNotify('Language deleted successfully', {
-                    theme: 'colored',
-                });
+                successNotify('Language deleted successfully');
                 getData();
             } else {
-                errorNotify('Language deletion failed', {
-                    theme: 'colored',
-                });
+                errorNotify('Language deletion failed');
             }
         } else {
             toast.dismiss(deleteToastID);
             setDeleteToastID(
                 infoNotify('Click again to delete language', {
-                    duration: 3000,
-                    theme: 'colored',
+                    autoClose: 3000,
                     pauseOnHover: false,
-                    pauseOnFocusLoss: false,
                     closeOnClick: false,
                     closeButton: false,
                 }),

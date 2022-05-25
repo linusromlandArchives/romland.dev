@@ -59,13 +59,7 @@ export default () => {
                         axios.post('/api/auth/login', values).then(({ data }) => {
                             if (data.success) {
                                 setModal(false);
-                                successNotify('Login successful', {
-                                    theme: 'colored',
-                                    position: 'top-right',
-                                    autoClose: 2500,
-                                    closeOnClick: true,
-                                    pauseOnHover: true,
-                                });
+                                successNotify('Login successful');
                             } else {
                                 setErrors({ login: data.error });
                             }
