@@ -1,6 +1,6 @@
 //External dependencies import
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, createSearchParams } from 'react-router-dom';
 
 //Local dependencies import
 import axios from '../axios';
@@ -34,7 +34,12 @@ export default function () {
 
     function navigateToSearch(event) {
         event.preventDefault();
-        navigate('/search/' + search);
+        navigate({
+            pathname: '/search',
+            search: createSearchParams({
+                query: search,
+            }).toString(),
+        });
     }
 
     return (
@@ -63,7 +68,7 @@ export default function () {
                             type="search"
                             name="q"
                             className="w-full py-3 text-sm text-black bg-gray-200 rounded-md pl-10 focus:outline-none "
-                            placeholder="Search..."
+                            placeholder="Search projects..."
                             autoComplete="off"
                             value={search}
                             onChange={(event) => setSearch(event.target.value)}
