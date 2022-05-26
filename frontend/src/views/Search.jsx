@@ -38,9 +38,9 @@ export default function () {
 
     return (
         <div className="bg-cyan-900 min-h-screen w-screen flex flex-col items-center">
-            <div className="bg-slate-400 w-full md:w-8/12 py-4 px-6 pt-1 m-0 md:m-6 flex flex-col rounded-md">
+            <div className="bg-transparent md:bg-slate-400 w-full md:w-8/12 min-h-screen md:min-h-fit rounded-none md:rounded-md py-4 px-6 pt-1 m-0 md:m-6 flex flex-col">
                 <Link to="/">
-                    <h3 className="text-3xl mt-4 text-center font-semibold">Romland.dev</h3>
+                    <h3 className="text-3xl mt-4 text-center font-semibold text-white md:text-black">Romland.dev</h3>
                 </Link>
                 <form className="w-full my-4" onSubmit={handleSearch}>
                     <div className="relative text-gray-600">
