@@ -9,6 +9,7 @@ import EditProject from './EditProject';
 import EditLanguage from './EditLanguage';
 import Search from './Search';
 import Language from './Language';
+import Project from './Project';
 
 //Export all views
-export { Home, Admin, AdminProjects, AdminLanguages, CreateProject, CreateLanguage, EditProject, EditLanguage, Search, Language };
+export { Home, Admin, AdminProjects, AdminLanguages, CreateProject, CreateLanguage, EditProject, EditLanguage, Search, Language, Project };

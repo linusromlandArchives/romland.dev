@@ -13,6 +13,7 @@ import {
     EditLanguage,
     Search,
     Language,
+    Project,
 } from './views';
 
 export default function () {
@@ -22,6 +23,7 @@ export default function () {
                 <Route path="/" element={<Home />} />
                 <Route path="/search" element={<Search />} />
                 <Route path="/language/:languageID" element={<Language />} />
+                <Route path="/project/:projectID" element={<Project />} />
                 <Route path="admin/">
                     <Route index element={<Navigate to="project" />} />
                     <Route path="project/">
