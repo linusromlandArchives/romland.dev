@@ -53,22 +53,26 @@ export default () => {
                     <h3 className="text-3xl font-semibold ">{project.projectName}</h3>
                     <p title={project.projectDescription}>{project.projectDescription}</p>
                     <div className="flex justify-end mt-2">
-                        <a
-                            className="bg-slate-200 hover:bg-slate-300 transition ease duration-150 text-black font-semibold py-2 px-4 rounded-md mr-4"
-                            href={project.projectURL}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            Demo
-                        </a>
-                        <a
-                            className="bg-slate-200 hover:bg-slate-300 transition ease duration-150 text-black font-semibold py-2 px-4 rounded-md"
-                            href={project.projectSourceCodeURL}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            Source Code
-                        </a>
+                        {project.projectURL && (
+                            <a
+                                className="bg-slate-200 hover:bg-slate-300 transition ease duration-150 text-black font-semibold py-2 px-4 rounded-md mr-4"
+                                href={project.projectURL}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Demo
+                            </a>
+                        )}
+                        {project.projectSourceCodeURL && (
+                            <a
+                                className="bg-slate-200 hover:bg-slate-300 transition ease duration-150 text-black font-semibold py-2 px-4 rounded-md"
+                                href={project.projectSourceCodeURL}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Source Code
+                            </a>
+                        )}
                     </div>
                     <div className="flex mt-2">
                         {project.programmingLanguages &&
