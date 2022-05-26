@@ -1,9 +1,10 @@
 //External dependencies import
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 //Internal dependencies import
 import axios from '../axios';
+import SearchResult from '../components/SearchResult';
 
 export default function () {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -24,6 +25,7 @@ export default function () {
         const request = await axios.get('/api/project/', {
             params: {
                 projectName: query,
+                visible: true,
             },
         });
         const response = await request.data;
@@ -36,8 +38,11 @@ export default function () {
 
     return (
         <div className="bg-cyan-900 min-h-screen w-screen flex flex-col items-center">
-            <div className="bg-slate-500 w-full md:w-8/12 m-6 flex flex-col items-center">
-                <form className="w-full mt-4 p-2" onSubmit={handleSearch}>
+            <div className="bg-slate-400 w-full md:w-8/12 py-4 px-6 pt-1 m-6 flex flex-col rounded-md">
+                <Link to="/">
+                    <h3 className="text-3xl mt-4 text-center font-semibold">Romland.dev</h3>
+                </Link>
+                <form className="w-full my-4" onSubmit={handleSearch}>
                     <div className="relative text-gray-600">
                         <span className="absolute inset-y-0 left-0 flex items-center pl-2">
                             <button type="submit" className="p-1 focus:outline-none focus:shadow-outline">
@@ -67,10 +72,7 @@ export default function () {
                 </form>
                 <div>
                     {searchResults.map((project) => (
-                        <div key={project.id}>
-                            <h1>{project.projectName}</h1>
-                            <p>{project.projectDescription}</p>
-                        </div>
+                        <SearchResult key={project.id} project={project} />
                     ))}
                 </div>
             </div>
