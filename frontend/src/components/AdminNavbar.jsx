@@ -12,14 +12,14 @@ export default () => {
                 <Link to="/">
                     <h1 className="text-2xl font-semibold p-2 hidden md:block">Romland.dev Admin</h1>
                 </Link>
-                <ul className="flex">
+                <ul className="flex w-full md:w-fit justify-around">
                     <li>
                         <Link to="/admin/project" className="text-2xl md:text-xl">
                             Projects
                         </Link>
                     </li>
                     <li>
-                        <Link to="/admin/language" className="mx-4 text-2xl md:text-xl">
+                        <Link to="/admin/language" className="mx-0 md:mx-4 text-2xl md:text-xl">
                             Languages
                         </Link>
                     </li>

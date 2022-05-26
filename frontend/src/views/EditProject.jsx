@@ -162,23 +162,19 @@ export default () => {
                                 errors.projectDescription = 'Project description cannot be empty';
                             }
 
-                            if (values.projectSourceCodeURL !== undefined && values.projectSourceCodeURL.trim() === '') {
-                                errors.projectSourceCodeURL = 'Project Source Code URL cannot be empty';
-                            }
-
-                            if (values.projectURL !== undefined && values.projectURL.trim() === '') {
-                                errors.projectURL = 'Project URL cannot be empty';
-                            }
-
                             const urlRegex = /((?:(?:http?)[s]*:\/\/)?[a-z0-9-%\\&=?.]+\.[a-z]{2,4}\/?([^\s<>#%",{}\\|\\^[\]`]+)?)/gi;
 
-                            if (values.projectSourceCodeURL !== undefined && values.projectSourceCodeURL.trim() !== '') {
+                            if (
+                                values.projectSourceCodeURL !== undefined &&
+                                values.projectSourceCodeURL.trim() !== '' &&
+                                values.projectSourceCodeURL.trim() !== ''
+                            ) {
                                 if (!new RegExp(urlRegex).test(values.projectSourceCodeURL)) {
                                     errors.projectSourceCodeURL = 'Project Source Code URL is not a valid URL';
                                 }
                             }
 
-                            if (values.projectURL !== undefined && values.projectURL.trim() !== '') {
+                            if (values.projectURL !== undefined && values.projectURL.trim() !== '' && values.projectURL.trim() !== '') {
                                 if (!new RegExp(urlRegex).test(values.projectURL)) {
                                     errors.projectURL = 'Project URL is not a valid URL';
                                 }

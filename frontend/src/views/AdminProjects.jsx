@@ -73,7 +73,9 @@ export default () => {
                             key={project.projectID}
                             className="my-4 p-4 rounded-md bg-slate-300 border-slate-500 border flex items-center justify-between"
                         >
-                            <h2 className="text-lg font-semibold">{project.projectName}</h2>
+                            <Link to={'/project/' + project.projectID}>
+                                <h2 className="text-lg font-semibold">{project.projectName}</h2>
+                            </Link>
                             <div className="flex">
                                 <MdEdit
                                     size="45px"

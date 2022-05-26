@@ -71,13 +71,7 @@ router.get('/', async (req: Request, res: Response) => {
  * @api {post} /api/project/ Create a new project
  */
 router.post('/', checkAdmin, async (req: Request, res: Response) => {
-    if (
-        !req.body.projectName ||
-        !req.body.projectDescription ||
-        !req.body.projectSourceCodeURL ||
-        !req.body.projectURL ||
-        !req.body.languageIDs
-    ) {
+    if (!req.body.projectName || !req.body.projectDescription || !req.body.languageIDs) {
         return res.status(400).json({
             success: false,
             error: 'Missing required fields',
