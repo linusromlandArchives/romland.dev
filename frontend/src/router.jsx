@@ -2,7 +2,18 @@
 import { Routes, Route, Navigate, BrowserRouter } from 'react-router-dom';
 
 //Views import
-import { Home, Admin, AdminProjects, AdminLanguages, CreateProject, CreateLanguage, EditProject, EditLanguage, Search } from './views';
+import {
+    Home,
+    Admin,
+    AdminProjects,
+    AdminLanguages,
+    CreateProject,
+    CreateLanguage,
+    EditProject,
+    EditLanguage,
+    Search,
+    Language,
+} from './views';
 
 export default function () {
     return (
@@ -10,6 +21,7 @@ export default function () {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/search" element={<Search />} />
+                <Route path="/language/:languageID" element={<Language />} />
                 <Route path="admin/">
                     <Route index element={<Navigate to="project" />} />
                     <Route path="project/">
