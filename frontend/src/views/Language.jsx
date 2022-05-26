@@ -57,7 +57,10 @@ export default function () {
                         <p className="" title={language.programmingLanguageDescription}>
                             {language.programmingLanguageDescription}
                         </p>
-                        <a className="text-black hover:text-gray-600 transition ease duration-150" href={language.programmingLanguageURL}>
+                        <a
+                            className="underline text-blue-600 hover:text-blue-800 visited:text-purple-600 transition ease duration-150"
+                            href={language.programmingLanguageURL}
+                        >
                             {language.programmingLanguageName}&#39;s website
                         </a>
                     </div>
