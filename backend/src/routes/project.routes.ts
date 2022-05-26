@@ -1,8 +1,10 @@
 //External Dependencies Import
 import { Request, Response, Router } from 'express';
+import { Op } from 'sequelize';
 
 //Local Dependencies Import
-import { project, projectImages, programmingLanguage } from '../models/models';
+import { project, projectImages, programmingLanguage } from '../models';
+import { checkAdmin } from '../auth';
 
 //Variable Declarations
 const router = Router();
@@ -11,9 +13,46 @@ const router = Router();
  * @api {get} /api/project/ Returns all projects
  */
 router.get('/', async (req: Request, res: Response) => {
+    const ids = req.query.ids as string;
+    const languageIDs = req.query.languageIDs as string;
+    const projectName = req.query.projectName as string;
+    const visible = req.query.visible as string;
+    const limit = req.query.limit as string;
+    const featured = req.query.featured as string;
+
+    const conditions = {} as any;
+    const associationsConditions = [];
+
+    if (ids) {
+        conditions.projectID = { [Op.in]: ids.split(',') };
+    }
+
+    if (projectName) {
+        conditions.projectName = { [Op.substring]: projectName };
+    }
+
+    if (visible) {
+        conditions.projectVisible = visible == 'true' ? true : false;
+    }
+
+    if (featured) {
+        conditions.projectFeatured = featured == 'true' ? true : false;
+    }
+
+    if (languageIDs) {
+        associationsConditions.push({
+            model: programmingLanguage,
+            where: {
+                programmingLanguageID: languageIDs,
+            },
+        });
+    }
+
     try {
         const projects = await project.findAll({
-            include: [projectImages, programmingLanguage],
+            where: conditions,
+            include: [projectImages, programmingLanguage, ...associationsConditions],
+            limit: limit ? parseInt(limit) : undefined,
         });
         res.json({
             success: true,
@@ -31,7 +70,7 @@ router.get('/', async (req: Request, res: Response) => {
 /**
  * @api {post} /api/project/ Create a new project
  */
-router.post('/', async (req: Request, res: Response) => {
+router.post('/', checkAdmin, async (req: Request, res: Response) => {
     if (
         !req.body.projectName ||
         !req.body.projectDescription ||
@@ -77,7 +116,7 @@ router.post('/', async (req: Request, res: Response) => {
 
         res.status(500).json({
             success: false,
-            message: error.message,
+            error: error.message,
         });
     }
 });
@@ -85,7 +124,7 @@ router.post('/', async (req: Request, res: Response) => {
 /**
  * @api {put} /api/project/ Edits the project with the specified id
  */
-router.put('/', async (req: Request, res: Response) => {
+router.put('/', checkAdmin, async (req: Request, res: Response) => {
     const foundProject = (await project.findByPk(req.body.projectID)) as any;
     if (!foundProject) {
         return res.status(404).json({
@@ -99,11 +138,13 @@ router.put('/', async (req: Request, res: Response) => {
         !req.body.projectDescription &&
         !req.body.projectSourceCodeURL &&
         !req.body.projectURL &&
+        !req.body.projectVisible &&
+        !req.body.projectFeatured &&
         !req.body.languageIDs
     ) {
         return res.status(400).json({
             success: false,
-            error: 'Missing required fields',
+            error: 'Please provide a valid projectName, projectDescription, projectSourceCodeURL, projectURL, projectVisible, projectFeatured or languageIDs',
         });
     }
 
@@ -113,6 +154,8 @@ router.put('/', async (req: Request, res: Response) => {
             projectDescription: req.body.projectDescription,
             projectSourceCodeURL: req.body.projectSourceCodeURL,
             projectURL: req.body.projectURL,
+            projectVisible: req.body.projectVisible,
+            projectFeatured: req.body.projectFeatured,
         });
 
         await foundProject.setProgrammingLanguages(
@@ -146,7 +189,7 @@ router.put('/', async (req: Request, res: Response) => {
 /**
  * @api {delete} /api/project/ Delete a project
  */
-router.delete('/', async (req: Request, res: Response) => {
+router.delete('/', checkAdmin, async (req: Request, res: Response) => {
     if (!req.body.projectID) {
         return res.status(400).json({
             success: false,
@@ -168,6 +211,7 @@ router.delete('/', async (req: Request, res: Response) => {
         } else {
             return res.status(200).json({
                 success: true,
+                error: '',
                 message: 'Project deleted',
             });
         }

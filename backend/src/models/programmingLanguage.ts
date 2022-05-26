@@ -1,7 +1,10 @@
-import { sequelize } from '../config/connection';
+//External Dependencies Import
 import { DataTypes } from 'sequelize';
 
-export const programmingLanguage = sequelize.define('programmingLanguage', {
+//Local Dependencies Import
+import { sequelize } from '../config/connection';
+
+const programmingLanguage = sequelize.define('programmingLanguage', {
     programmingLanguageID: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
@@ -25,3 +28,5 @@ export const programmingLanguage = sequelize.define('programmingLanguage', {
         allowNull: false,
     },
 });
+
+export default programmingLanguage;

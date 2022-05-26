@@ -1,17 +1,60 @@
 //External Dependencies Import
 import { Request, Response, Router } from 'express';
 import fs from 'fs';
+import path from 'path';
 
 //Local Dependencies Import
-import { project, projectImages } from '../models/models';
+import { project, projectImages } from '../models';
+import { checkAdmin } from '../auth';
 
 //Variable Declarations
 const router = Router();
 
 /**
+ * @api {get} /api/noImage/ Send the noImage image
+ */
+router.get('/noImage', async (req: Request, res: Response) => {
+    try {
+        res.status(200).sendFile(path.join(path.resolve(), 'src/public/noImage.jpg'));
+    } catch (error: any) {
+        res.status(500).json({
+            success: false,
+            error: error.message,
+        });
+    }
+});
+
+/**
+ * @api {get} /api/projectImage/ Send the projectImage with the specified id
+ */
+router.get('/:id', async (req: Request, res: Response) => {
+    try {
+        const projectImage = (await projectImages.findOne({
+            where: {
+                projectImagesID: req.params.id,
+            },
+        })) as any;
+        if (projectImage) {
+            res.status(200).sendFile(path.join(path.resolve(), `src/public/uploadedImages/${projectImage.projectImagesFileName}`));
+        } else {
+            res.status(404).json({
+                success: false,
+
+                error: 'Project Image not found',
+            });
+        }
+    } catch (error: any) {
+        res.status(500).json({
+            success: false,
+            error: error.message,
+        });
+    }
+});
+
+/**
  * @api {post} /api/projectImage/ Create a new projectImage
  */
-router.post('/:projectID', async (req: Request, res: Response) => {
+router.post('/:projectID', checkAdmin, async (req: Request, res: Response) => {
     if (!req.params.projectID) {
         return res.status(400).json({
             success: false,
@@ -68,7 +111,7 @@ router.post('/:projectID', async (req: Request, res: Response) => {
 
     try {
         const createdProjectImage = await projectImages.create({
-            projectID: req.body.projectID,
+            projectID: req.params.projectID,
             projectImagesFileName: fileName,
         });
 
@@ -91,7 +134,7 @@ router.post('/:projectID', async (req: Request, res: Response) => {
 /**
  * @api {delete} /api/projectImage/ Delete a projectImage
  */
-router.delete('/', async (req: Request, res: Response) => {
+router.delete('/', checkAdmin, async (req: Request, res: Response) => {
     if (!req.body.projectImagesID) {
         return res.status(400).json({
             success: false,

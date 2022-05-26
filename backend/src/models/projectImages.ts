@@ -1,7 +1,10 @@
-import { sequelize } from '../config/connection';
+//External Dependencies Import
 import { DataTypes } from 'sequelize';
 
-export const projectImages = sequelize.define('projectImages', {
+//Local Dependencies Import
+import { sequelize } from '../config/connection';
+
+const projectImages = sequelize.define('projectImages', {
     projectImagesID: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
@@ -13,3 +16,5 @@ export const projectImages = sequelize.define('projectImages', {
         unique: true,
     },
 });
+
+export default projectImages;

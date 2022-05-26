@@ -1,8 +1,10 @@
 //External Dependencies Import
 import { Request, Response, Router } from 'express';
+import { Op } from 'sequelize';
 
 //Local Dependencies Import
-import { programmingLanguage } from '../models/models';
+import { programmingLanguage } from '../models';
+import { checkAdmin } from '../auth';
 
 //Variable Declarations
 const router = Router();
@@ -11,8 +13,18 @@ const router = Router();
  * @api {get} /api/language/ Returns all languages
  */
 router.get('/', async (req: Request, res: Response) => {
+    const ids = req.query.ids as string;
+
+    const conditions = {} as any;
+
+    if (ids) {
+        conditions.programmingLanguageID = { [Op.in]: ids.split(',') };
+    }
+
     try {
-        const languages = await programmingLanguage.findAll();
+        const languages = await programmingLanguage.findAll({
+            where: conditions,
+        });
         res.json({
             success: true,
             error: '',
@@ -29,7 +41,7 @@ router.get('/', async (req: Request, res: Response) => {
 /**
  * @api {post} /api/language/ Create a new language
  */
-router.post('/', async (req: Request, res: Response) => {
+router.post('/', checkAdmin, async (req: Request, res: Response) => {
     if (
         !req.body.programmingLanguageName ||
         !req.body.programmingLanguageIcon ||
@@ -38,7 +50,7 @@ router.post('/', async (req: Request, res: Response) => {
     ) {
         return res.status(400).json({
             success: false,
-            error: 'Please provide a valid programmingLanguageName, programmingLanguageIcon, programmingLanguageDescription and programmingLanguageURL.',
+            error: 'Missing required fields.',
         });
     }
 
@@ -65,7 +77,7 @@ router.post('/', async (req: Request, res: Response) => {
 
         res.status(500).json({
             success: false,
-            message: error.message,
+            error: error.message,
         });
     }
 });
@@ -73,7 +85,7 @@ router.post('/', async (req: Request, res: Response) => {
 /**
  * @api {put} /api/language/ Edits the language with the specified id
  */
-router.put('/', async (req: Request, res: Response) => {
+router.put('/', checkAdmin, async (req: Request, res: Response) => {
     const language = await programmingLanguage.findByPk(req.body.programmingLanguageID);
     if (!language) {
         return res.status(404).json({
@@ -90,7 +102,7 @@ router.put('/', async (req: Request, res: Response) => {
     ) {
         return res.status(400).json({
             success: false,
-            error: 'Please provide a valid programmingLanguageName, programmingLanguageIcon, programmingLanguageDescription programmingLanguageURL.',
+            error: 'Please provide a valid programmingLanguageName, programmingLanguageIcon, programmingLanguageDescription or programmingLanguageURL.',
         });
     }
 
@@ -124,7 +136,7 @@ router.put('/', async (req: Request, res: Response) => {
 /**
  * @api {delete} /api/language/ Delete a language
  */
-router.delete('/', async (req: Request, res: Response) => {
+router.delete('/', checkAdmin, async (req: Request, res: Response) => {
     if (!req.body.programmingLanguageID) {
         return res.status(400).json({
             success: false,
@@ -146,7 +158,8 @@ router.delete('/', async (req: Request, res: Response) => {
         } else {
             return res.status(200).json({
                 success: true,
-                error: 'Language deleted',
+                error: '',
+                message: 'Language deleted',
             });
         }
     } catch (error: any) {
