@@ -42,7 +42,13 @@ export default () => {
     return (
         <div className="bg-cyan-900 min-h-screen w-screen flex flex-col items-center">
             <div className="bg-transparent md:bg-slate-400 w-full md:w-8/12 min-h-screen md:min-h-fit rounded-none md:rounded-md py-4 px-6 pt-1 m-0 md:m-6 flex flex-col">
-                <ImageGallery items={images} showNav={false} showFullscreenButton={false} showPlayButton={false} />
+                <ImageGallery
+                    items={images}
+                    showNav={false}
+                    showFullscreenButton={false}
+                    showPlayButton={false}
+                    showThumbnails={project.projectImages && project.projectImages.length == 0 ? false : true}
+                />
                 <div className="ml-2 flex flex-col justify-end text-white md:text-black">
                     <h3 className="text-3xl font-semibold ">{project.projectName}</h3>
                     <p title={project.projectDescription}>{project.projectDescription}</p>
