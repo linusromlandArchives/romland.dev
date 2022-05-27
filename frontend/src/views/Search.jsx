@@ -37,10 +37,10 @@ export default function () {
     }, []);
 
     return (
-        <div className="bg-cyan-900 min-h-screen w-screen flex flex-col items-center">
-            <div className="bg-transparent md:bg-slate-400 w-full md:w-8/12 min-h-screen md:min-h-fit rounded-none md:rounded-md py-4 px-6 pt-1 m-0 md:m-6 flex flex-col">
+        <div className="flex flex-col items-center w-screen min-h-screen bg-cyan-900">
+            <div className="flex flex-col w-full min-h-screen px-6 py-4 pt-1 m-0 bg-transparent rounded-none md:bg-slate-400 md:w-8/12 md:min-h-fit md:rounded-md md:m-6">
                 <Link to="/">
-                    <h3 className="text-3xl mt-4 text-center font-semibold text-white md:text-black">Romland.dev</h3>
+                    <h3 className="mt-4 text-3xl font-semibold text-center text-white md:text-black">Romland.dev</h3>
                 </Link>
                 <form className="w-full my-4" onSubmit={handleSearch}>
                     <div className="relative text-gray-600">
@@ -62,7 +62,7 @@ export default function () {
                         <input
                             type="search"
                             name="q"
-                            className="w-full py-3 text-sm text-black bg-gray-200 rounded-md pl-10 focus:outline-none "
+                            className="w-full py-3 pl-10 text-sm text-black bg-gray-200 rounded-md focus:outline-none "
                             placeholder="Search..."
                             autoComplete="off"
                             value={query}

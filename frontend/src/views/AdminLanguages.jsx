@@ -56,13 +56,13 @@ export default () => {
     }
 
     return (
-        <div className="w-full flex justify-center">
-            <section className="w-full md:w-1/2 rounded-md bg-slate-200 p-8 mt-6">
-                <div className="flex justify-between items-center">
+        <div className="flex justify-center w-full">
+            <section className="w-full p-8 mt-6 rounded-md md:w-1/2 bg-slate-200">
+                <div className="flex items-center justify-between">
                     <h1 className="text-4xl font-semibold">Programming Languages</h1>
                     <Link
                         to="/admin/language/create"
-                        className="text-black bg-slate-300 hover:bg-slate-200 border-slate-500 border rounded-md p-2 transition duration-150 ease"
+                        className="p-2 text-black transition duration-150 border rounded-md bg-slate-300 hover:bg-slate-200 border-slate-500 ease"
                     >
                         Create a new Language
                     </Link>
@@ -71,12 +71,12 @@ export default () => {
                     {data.map((language) => (
                         <li
                             key={language.programmingLanguageID}
-                            className="my-4 p-4 rounded-md bg-slate-300 border-slate-500 border flex items-center justify-between"
+                            className="flex items-center justify-between p-4 my-4 border rounded-md bg-slate-300 border-slate-500"
                         >
                             <Link to={`/language/${language.programmingLanguageID}`}>
                                 <div className="flex items-center">
                                     <img
-                                        className="h-12 w-12 object-scale-down rounded-lg"
+                                        className="object-scale-down w-12 h-12 rounded-lg"
                                         src={language.programmingLanguageIcon}
                                         alt={language.name + ' Icon'}
                                     />
@@ -86,12 +86,12 @@ export default () => {
                             <div className="flex">
                                 <MdEdit
                                     size="45px"
-                                    className="m-1 p-2 rounded-md hover:border border-slate-500  cursor-pointer"
+                                    className="p-2 m-1 rounded-md cursor-pointer hover:border border-slate-500"
                                     onClick={() => navigate(`/admin/language/edit/${language.programmingLanguageID}`)}
                                 />
                                 <MdClose
                                     size="45px"
-                                    className="m-1 p-2 rounded-md hover:border border-slate-500  cursor-pointer"
+                                    className="p-2 m-1 rounded-md cursor-pointer hover:border border-slate-500"
                                     onClick={() => deleteLanguage(language.programmingLanguageID)}
                                 />
                             </div>

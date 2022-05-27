@@ -20,14 +20,14 @@ export default (props) => {
 
     return (
         <Link to={`/project/${project.projectID}`}>
-            <div className="w-full bg-slate-200 hover:bg-slate-100 transition ease duration-150 rounded-md p-2 my-2 flex items-center">
-                <img src={image} alt={project.projectName} className="w-44 h-28 object-cover" />
-                <div className="ml-4 h-28 flex flex-col justify-between">
+            <div className="flex items-center w-full p-2 my-2 transition duration-150 rounded-md bg-slate-200 hover:bg-slate-100 ease">
+                <img src={image} alt={project.projectName} className="object-cover w-44 h-28" />
+                <div className="flex flex-col justify-between ml-4 h-28">
                     <div>
-                        <h1 className="text-2xl h-8 font-semibold" title={project.projectName}>
+                        <h1 className="h-8 text-2xl font-semibold" title={project.projectName}>
                             {project.projectName}
                         </h1>
-                        <p className="text-base h-12 overflow-hidden" title={project.projectDescription}>
+                        <p className="h-12 overflow-hidden text-base" title={project.projectDescription}>
                             {project.projectDescription}
                         </p>
                     </div>

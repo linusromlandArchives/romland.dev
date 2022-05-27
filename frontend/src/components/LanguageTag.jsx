@@ -10,7 +10,7 @@ export default (props) => {
                 <img
                     src={languages.programmingLanguageIcon}
                     alt={languages.programmingLanguageName + ' icon'}
-                    className="w-full h-4 object-cover mx-1"
+                    className="object-cover w-full h-4 mx-1"
                 />
                 <h1 className={`mr-1 ${altColor ? 'text-black' : 'text-white'}`}>{languages.programmingLanguageName}</h1>
             </div>

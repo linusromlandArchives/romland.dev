@@ -30,13 +30,13 @@ export default () => {
     }
 
     return (
-        <div className="w-full flex justify-center">
-            <div className="w-full md:w-1/2 rounded-md bg-slate-200 p-8 mt-6">
-                <div className="flex justify-between items-center mb-4">
+        <div className="flex justify-center w-full">
+            <div className="w-full p-8 mt-6 rounded-md md:w-1/2 bg-slate-200">
+                <div className="flex items-center justify-between mb-4">
                     <h1 className="text-4xl font-semibold">Edit a project</h1>
                     <Link
                         to="/admin/language"
-                        className="text-black bg-slate-300 hover:bg-slate-200 border-slate-500 border rounded-md p-2 transition duration-150 ease"
+                        className="p-2 text-black transition duration-150 border rounded-md bg-slate-300 hover:bg-slate-200 border-slate-500 ease"
                     >
                         Back to admin
                     </Link>
@@ -109,11 +109,11 @@ export default () => {
                                     name="programmingLanguageName"
                                     placeholder="Programming Language Name"
                                     autoComplete="off"
-                                    className="border border-gray-200 p-2 rounded-md"
+                                    className="p-2 border border-gray-200 rounded-md"
                                     autoFocus
                                 />
                             </label>
-                            <ErrorMessage component="span" name="programmingLanguageName" className="text-red-500 text-sm mb-2 italic" />
+                            <ErrorMessage component="span" name="programmingLanguageName" className="mb-2 text-sm italic text-red-500" />
                             <label className="flex flex-col">
                                 Programming language description
                                 <Field
@@ -121,13 +121,13 @@ export default () => {
                                     placeholder="Programming language description"
                                     autoComplete="off"
                                     as="textarea"
-                                    className="border border-gray-200 p-2 rounded-md"
+                                    className="p-2 border border-gray-200 rounded-md"
                                 />
                             </label>
                             <ErrorMessage
                                 component="span"
                                 name="programmingLanguageDescription"
-                                className="text-red-500 text-sm mb-2 italic"
+                                className="mb-2 text-sm italic text-red-500"
                             />
                             <label className="flex flex-col">
                                 <p>
@@ -137,25 +137,25 @@ export default () => {
                                     name="programmingLanguageIcon"
                                     placeholder="Programming Language Icon"
                                     autoComplete="off"
-                                    className="border border-gray-200 p-2 rounded-md"
+                                    className="p-2 border border-gray-200 rounded-md"
                                 />
                             </label>
-                            <ErrorMessage component="span" name="programmingLanguageIcon" className="text-red-500 text-sm mb-2 italic" />
+                            <ErrorMessage component="span" name="programmingLanguageIcon" className="mb-2 text-sm italic text-red-500" />
                             <label className="flex flex-col">
                                 Programming language URL
                                 <Field
                                     name="programmingLanguageURL"
                                     placeholder="Programming language URL"
                                     autoComplete="off"
-                                    className="border border-gray-200 p-2 rounded-md"
+                                    className="p-2 border border-gray-200 rounded-md"
                                 />
                             </label>
-                            <ErrorMessage component="span" name="programmingLanguageURL" className="text-red-500 text-sm mb-2 italic" />
+                            <ErrorMessage component="span" name="programmingLanguageURL" className="mb-2 text-sm italic text-red-500" />
 
-                            <ErrorMessage component="span" name="created" className="text-red-500 text-md mt-4 italic" />
+                            <ErrorMessage component="span" name="created" className="mt-4 italic text-red-500 text-md" />
                             <input
                                 disabled={!isValid}
-                                className="bg-blue-500 hover:bg-blue-400 disabled:bg-blue-300 mt-4 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition ease duration-150 cursor-pointer disabled:cursor-not-allowed"
+                                className="px-4 py-2 mt-4 font-bold text-white transition duration-150 bg-blue-500 rounded cursor-pointer hover:bg-blue-400 disabled:bg-blue-300 focus:outline-none focus:shadow-outline ease disabled:cursor-not-allowed"
                                 type="submit"
                                 value="Create"
                             />

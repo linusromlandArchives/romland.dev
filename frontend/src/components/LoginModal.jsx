@@ -45,7 +45,7 @@ export default () => {
                 }}
             >
                 <div className="mb-4">
-                    <Link to="/" className="hover:underline mb-4 ">
+                    <Link to="/" className="mb-4 hover:underline ">
                         Go back
                     </Link>
                     <h1 className="text-3xl font-semibold">Access limited</h1>
@@ -82,23 +82,23 @@ export default () => {
                         <Form className="flex flex-col">
                             <label className="flex flex-col">
                                 Username
-                                <Field name="username" placeholder="Username" className="border border-gray-200 p-2 rounded-md" autoFocus />
+                                <Field name="username" placeholder="Username" className="p-2 border border-gray-200 rounded-md" autoFocus />
                             </label>
-                            <ErrorMessage component="span" name="username" className="text-red-500 text-md mb-4 italic" />
+                            <ErrorMessage component="span" name="username" className="mb-4 italic text-red-500 text-md" />
                             <label className="flex flex-col">
                                 Password
                                 <Field
                                     name="password"
                                     type="password"
                                     placeholder="Password"
-                                    className="border border-gray-200 p-2 rounded-md"
+                                    className="p-2 border border-gray-200 rounded-md"
                                 />
                             </label>
-                            <ErrorMessage component="span" name="password" className="text-red-500 text-md mb-4 italic" />
-                            <ErrorMessage component="span" name="login" className="text-red-500 text-md mt-4 italic" />
+                            <ErrorMessage component="span" name="password" className="mb-4 italic text-red-500 text-md" />
+                            <ErrorMessage component="span" name="login" className="mt-4 italic text-red-500 text-md" />
                             <input
                                 disabled={!dirty || !isValid}
-                                className="bg-blue-500 hover:bg-blue-400 disabled:bg-blue-300 mt-4 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition ease duration-150 cursor-pointer disabled:cursor-not-allowed"
+                                className="px-4 py-2 mt-4 font-bold text-white transition duration-150 bg-blue-500 rounded cursor-pointer hover:bg-blue-400 disabled:bg-blue-300 focus:outline-none focus:shadow-outline ease disabled:cursor-not-allowed"
                                 type="submit"
                                 value="Login"
                             />

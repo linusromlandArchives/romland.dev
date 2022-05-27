@@ -48,15 +48,15 @@ export default function () {
     }, []);
 
     return (
-        <div className="bg-cyan-900 min-h-screen w-screen flex flex-col items-center">
-            <div className="bg-transparent md:bg-slate-400 w-full md:w-8/12 min-h-screen md:min-h-fit rounded-none md:rounded-md py-4 px-6 pt-1 m-0 md:m-6 flex flex-col">
+        <div className="flex flex-col items-center w-screen min-h-screen bg-cyan-900">
+            <div className="flex flex-col w-full min-h-screen px-6 py-4 pt-1 m-0 bg-transparent rounded-none md:bg-slate-400 md:w-8/12 md:min-h-fit md:rounded-md md:m-6">
                 <div className="flex mt-4 text-white md:text-black">
                     <img className="w-24 h-24" src={language.programmingLanguageIcon} alt={language.programmingLanguageName} />
-                    <div className="ml-2 flex flex-col justify-end ">
+                    <div className="flex flex-col justify-end ml-2 ">
                         <h3 className="text-3xl font-semibold ">{language.programmingLanguageName}</h3>
                         <p title={language.programmingLanguageDescription}>{language.programmingLanguageDescription}</p>
                         <a
-                            className="underline text-blue-400 md:text-blue-600 hover:text-blue-600 md:hover:text-blue-800 visited:text-purple-400 md:visited:text-purple-600 transition ease duration-150"
+                            className="text-blue-400 underline transition duration-150 md:text-blue-600 hover:text-blue-600 md:hover:text-blue-800 visited:text-purple-400 md:visited:text-purple-600 ease"
                             href={language.programmingLanguageURL}
                         >
                             {language.programmingLanguageName}&#39;s website
@@ -84,7 +84,7 @@ export default function () {
                         <input
                             type="search"
                             name="q"
-                            className="w-full py-3 text-sm text-black bg-gray-200 rounded-md pl-10 focus:outline-none "
+                            className="w-full py-3 pl-10 text-sm text-black bg-gray-200 rounded-md focus:outline-none "
                             placeholder="Search..."
                             autoComplete="off"
                             value={query}
