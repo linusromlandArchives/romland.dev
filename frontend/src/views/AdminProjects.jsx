@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 
 //Local dependencies import
 import axios from '../axios';
-import { successNotify, infoNotify, errorNotify } from '../components/Toast';
+import { successNotify, infoNotify, errorNotify } from '../components/';
 
 export default () => {
     //Initialize the react-router navigator

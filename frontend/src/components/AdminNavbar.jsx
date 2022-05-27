@@ -2,7 +2,7 @@
 import { Link } from 'react-router-dom';
 
 //Local dependencies import
-import LoginModal from './LoginModal';
+import { LoginModal } from './';
 
 export default () => {
     return (

@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 //Local dependencies import
-import LanguageTag from './LanguageTag';
+import { LanguageTag } from './';
 
 export default (props) => {
     const { project } = props;

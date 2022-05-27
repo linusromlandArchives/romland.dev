@@ -5,7 +5,7 @@ import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
 
 //Local dependencies import
-import LanguageTag from '../components/LanguageTag';
+import { LanguageTag } from '../components/';
 
 export default () => {
     const { projectID } = useParams();

@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 
 //Local dependencies import
 import axios from '../axios';
-import { successNotify, errorNotify } from '../components/Toast';
+import { successNotify, errorNotify } from '../components/';
 
 export default () => {
     const navigate = useNavigate();

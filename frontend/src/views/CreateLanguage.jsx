@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 //Local dependencies import
 import axios from '../axios';
-import { successNotify, errorNotify } from '../components/Toast';
+import { successNotify, errorNotify } from '../components/';
 
 export default () => {
     const navigate = useNavigate();

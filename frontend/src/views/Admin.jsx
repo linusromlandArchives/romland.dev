@@ -1,5 +1,5 @@
 //Local dependencies import
-import AdminNavbar from '../components/AdminNavbar';
+import { AdminNavbar } from '../components/';
 
 export default function (props) {
     const { children } = props;

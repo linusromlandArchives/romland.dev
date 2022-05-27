@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 
 //Internal dependencies import
 import axios from '../axios';
-import SearchResult from '../components/SearchResult';
+import { SearchResult } from '../components/';
 
 export default function () {
     const { languageID } = useParams();

@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 //Local dependencies import
 import axios from '../axios';
-import { successNotify } from './Toast';
+import { successNotify } from './';
 
 export default () => {
     const [modalIsOpen, setModal] = useState(true);

@@ -4,8 +4,7 @@ import { useNavigate, createSearchParams } from 'react-router-dom';
 
 //Local dependencies import
 import axios from '../axios';
-import { errorNotify } from '../components/Toast';
-import FeaturedCard from '../components/FeaturedCard';
+import { FeaturedCard, errorNotify } from '../components/';
 
 export default function () {
     const navigate = useNavigate();
