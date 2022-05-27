@@ -7,7 +7,7 @@ import { useState, useEffect, createRef } from 'react';
 
 //Local dependencies import
 import axios from '../axios';
-import { successNotify, infoNotify, errorNotify } from '../components/';
+import { successNotify, infoNotify, errorNotify } from '../components/Toast';
 
 export default () => {
     const navigate = useNavigate();
@@ -104,13 +104,13 @@ export default () => {
     }
 
     return (
-        <div className="flex justify-center w-full">
-            <div className="w-full p-8 mt-6 rounded-md lg:w-8/12 bg-slate-200">
-                <div className="flex items-center justify-between mb-4">
+        <div className="flex w-full justify-center">
+            <div className="mt-6 w-full rounded-md bg-slate-200 p-8 lg:w-8/12">
+                <div className="mb-4 flex items-center justify-between">
                     <h1 className="text-4xl font-semibold">Edit a project</h1>
                     <Link
                         to="/admin/project"
-                        className="p-2 text-black transition duration-150 border rounded-md bg-slate-300 hover:bg-slate-200 border-slate-500 ease"
+                        className="ease rounded-md border border-slate-500 bg-slate-300 p-2 text-black transition duration-150 hover:bg-slate-200"
                     >
                         Back to admin
                     </Link>
@@ -188,14 +188,14 @@ export default () => {
                         }}
                     >
                         {({ values, setFieldValue, isValid }) => (
-                            <Form className="flex flex-col w-full mt-4 mr-0 lg:w-1/2 md:mr-6 md:mt-0">
+                            <Form className="mt-4 mr-0 flex w-full flex-col md:mt-0 md:mr-6 lg:w-1/2">
                                 <label className="flex flex-col">
                                     Project name
                                     <Field
                                         name="projectName"
                                         placeholder="Project name"
                                         autoComplete="off"
-                                        className="p-2 border border-gray-200 rounded-md"
+                                        className="rounded-md border border-gray-200 p-2"
                                         autoFocus
                                     />
                                 </label>
@@ -207,7 +207,7 @@ export default () => {
                                         placeholder="Project description"
                                         autoComplete="off"
                                         as="textarea"
-                                        className="p-2 border border-gray-200 rounded-md"
+                                        className="rounded-md border border-gray-200 p-2"
                                     />
                                 </label>
                                 <ErrorMessage component="span" name="projectDescription" className="mb-2 text-sm italic text-red-500" />
@@ -219,7 +219,7 @@ export default () => {
                                         name="projectSourceCodeURL"
                                         placeholder="Project Source Code URL"
                                         autoComplete="off"
-                                        className="p-2 border border-gray-200 rounded-md"
+                                        className="rounded-md border border-gray-200 p-2"
                                     />
                                 </label>
                                 <ErrorMessage component="span" name="projectSourceCodeURL" className="mb-2 text-sm italic text-red-500" />
@@ -229,7 +229,7 @@ export default () => {
                                         name="projectURL"
                                         placeholder="Project URL"
                                         autoComplete="off"
-                                        className="p-2 border border-gray-200 rounded-md"
+                                        className="rounded-md border border-gray-200 p-2"
                                     />
                                 </label>
                                 <ErrorMessage component="span" name="projectURL" className="mb-2 text-sm italic text-red-500" />
@@ -257,32 +257,32 @@ export default () => {
                                         <Field
                                             name="projectVisible"
                                             type="checkbox"
-                                            className="p-2 ml-2 border border-gray-200 rounded-md"
+                                            className="ml-2 rounded-md border border-gray-200 p-2"
                                         />
                                     </label>
-                                    <label className="flex items-center ml-6">
+                                    <label className="ml-6 flex items-center">
                                         <p>Featured</p>
                                         <Field
                                             name="projectFeatured"
                                             type="checkbox"
-                                            className="p-2 ml-2 border border-gray-200 rounded-md"
+                                            className="ml-2 rounded-md border border-gray-200 p-2"
                                         />
                                     </label>
                                 </div>
 
-                                <ErrorMessage component="span" name="created" className="mt-4 italic text-red-500 text-md" />
+                                <ErrorMessage component="span" name="created" className="mt-4 italic text-red-500" />
                                 <input
                                     disabled={!isValid}
-                                    className="px-4 py-2 mt-4 font-bold text-white transition duration-150 bg-blue-500 rounded cursor-pointer hover:bg-blue-400 disabled:bg-blue-300 focus:outline-none focus:shadow-outline ease disabled:cursor-not-allowed"
+                                    className="ease mt-4 cursor-pointer rounded bg-blue-500 py-2 px-4 font-bold text-white transition duration-150 hover:bg-blue-400 focus:outline-none disabled:cursor-not-allowed disabled:bg-blue-300"
                                     type="submit"
                                     value="Save"
                                 />
                             </Form>
                         )}
                     </Formik>
-                    <div className="w-full ml-0 lg:w-1/2 md:ml-6">
+                    <div className="ml-0 w-full md:ml-6 lg:w-1/2">
                         <button
-                            className="px-4 py-2 m-2 font-bold text-white transition duration-150 bg-blue-500 rounded cursor-pointer hover:bg-blue-400 disabled:bg-blue-300 focus:outline-none focus:shadow-outline ease disabled:cursor-not-allowed"
+                            className="ease m-2 cursor-pointer rounded bg-blue-500 py-2 px-4 font-bold text-white transition duration-150 hover:bg-blue-400 focus:outline-none disabled:cursor-not-allowed disabled:bg-blue-300"
                             onClick={() => {
                                 uploadInput.current.click();
                             }}
@@ -291,19 +291,19 @@ export default () => {
                         </button>
                         <input type="file" accept="image/*" className="hidden" ref={uploadInput} />
 
-                        <div className="flex flex-wrap overflow-y-none md:overflow-y-scroll max-h-max md:max-h-96">
+                        <div className="flex max-h-max flex-wrap overflow-y-auto md:max-h-96 md:overflow-y-scroll">
                             {project &&
                                 project.projectImages &&
                                 project.projectImages.length > 0 &&
                                 project.projectImages.map((image, index) => (
-                                    <div key={index} className="flex flex-col items-center w-5/12 p-2 m-2 rounded-md bg-slate-300">
+                                    <div key={index} className="m-2 flex w-5/12 flex-col items-center rounded-md bg-slate-300 p-2">
                                         <img
                                             src={'/api/projectImage/' + image.projectImagesID}
                                             alt={image.projectImagesFileName}
-                                            className="rounded-md h-28"
+                                            className="h-28 rounded-md"
                                         />
                                         <button
-                                            className="flex items-center justify-center w-full p-1 m-2 font-semibold text-white transition duration-150 bg-red-500 rounded cursor-pointer hover:bg-red-400 disabled:bg-red-300 focus:outline-none focus:shadow-outline ease disabled:cursor-not-allowed"
+                                            className="ease m-2 flex w-full cursor-pointer items-center justify-center rounded bg-red-500 p-1 font-semibold text-white transition duration-150 hover:bg-red-400 focus:outline-none disabled:cursor-not-allowed disabled:bg-red-300"
                                             onClick={() => {
                                                 deleteProjectImage(image.projectImagesID);
                                             }}

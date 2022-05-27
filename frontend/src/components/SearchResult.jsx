@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 //Local dependencies import
-import { LanguageTag } from './';
+import LanguageTag from './LanguageTag';
 
 export default (props) => {
     const { project } = props;
@@ -20,9 +20,9 @@ export default (props) => {
 
     return (
         <Link to={`/project/${project.projectID}`}>
-            <div className="flex items-center w-full p-2 my-2 transition duration-150 rounded-md bg-slate-200 hover:bg-slate-100 ease">
-                <img src={image} alt={project.projectName} className="object-cover w-44 h-28" />
-                <div className="flex flex-col justify-between ml-4 h-28">
+            <div className="ease my-2 flex w-full items-center rounded-md bg-slate-200 p-2 transition duration-150 hover:bg-slate-100">
+                <img src={image} alt={project.projectName} className="h-28 w-44 object-cover" />
+                <div className="ml-4 flex h-28 flex-col justify-between">
                     <div>
                         <h1 className="h-8 text-2xl font-semibold" title={project.projectName}>
                             {project.projectName}

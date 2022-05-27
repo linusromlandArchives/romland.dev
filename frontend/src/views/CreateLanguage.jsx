@@ -5,19 +5,19 @@ import { useNavigate } from 'react-router-dom';
 
 //Local dependencies import
 import axios from '../axios';
-import { successNotify, errorNotify } from '../components/';
+import { successNotify, errorNotify } from '../components/Toast';
 
 export default () => {
     const navigate = useNavigate();
 
     return (
-        <div className="flex justify-center w-full">
-            <div className="w-full p-8 mt-6 rounded-md md:w-1/2 bg-slate-200">
-                <div className="flex items-center justify-between mb-4">
+        <div className="flex w-full justify-center">
+            <div className="mt-6 w-full rounded-md bg-slate-200 p-8 md:w-1/2">
+                <div className="mb-4 flex items-center justify-between">
                     <h1 className="text-4xl font-semibold">Create programming language</h1>
                     <Link
                         to="/admin/language"
-                        className="p-2 text-black transition duration-150 border rounded-md bg-slate-300 hover:bg-slate-200 border-slate-500 ease"
+                        className="ease rounded-md border border-slate-500 bg-slate-300 p-2 text-black transition duration-150 hover:bg-slate-200"
                     >
                         Back to admin
                     </Link>
@@ -87,7 +87,7 @@ export default () => {
                                     name="programmingLanguageName"
                                     placeholder="Programming Language Name"
                                     autoComplete="off"
-                                    className="p-2 border border-gray-200 rounded-md"
+                                    className="rounded-md border border-gray-200 p-2"
                                     autoFocus
                                 />
                             </label>
@@ -99,7 +99,7 @@ export default () => {
                                     placeholder="Programming language description"
                                     autoComplete="off"
                                     as="textarea"
-                                    className="p-2 border border-gray-200 rounded-md"
+                                    className="rounded-md border border-gray-200 p-2"
                                 />
                             </label>
                             <ErrorMessage
@@ -115,7 +115,7 @@ export default () => {
                                     name="programmingLanguageIcon"
                                     placeholder="Programming Language Icon"
                                     autoComplete="off"
-                                    className="p-2 border border-gray-200 rounded-md"
+                                    className="rounded-md border border-gray-200 p-2"
                                 />
                             </label>
                             <ErrorMessage component="span" name="programmingLanguageIcon" className="mb-2 text-sm italic text-red-500" />
@@ -125,15 +125,15 @@ export default () => {
                                     name="programmingLanguageURL"
                                     placeholder="Programming language URL"
                                     autoComplete="off"
-                                    className="p-2 border border-gray-200 rounded-md"
+                                    className="rounded-md border border-gray-200 p-2"
                                 />
                             </label>
                             <ErrorMessage component="span" name="programmingLanguageURL" className="mb-2 text-sm italic text-red-500" />
 
-                            <ErrorMessage component="span" name="created" className="mt-4 italic text-red-500 text-md" />
+                            <ErrorMessage component="span" name="created" className="mt-4 italic text-red-500" />
                             <input
                                 disabled={!dirty || !isValid}
-                                className="px-4 py-2 mt-4 font-bold text-white transition duration-150 bg-blue-500 rounded cursor-pointer hover:bg-blue-400 disabled:bg-blue-300 focus:outline-none focus:shadow-outline ease disabled:cursor-not-allowed"
+                                className="ease mt-4 cursor-pointer rounded bg-blue-500 py-2 px-4 font-bold text-white transition duration-150 hover:bg-blue-400 focus:outline-none disabled:cursor-not-allowed disabled:bg-blue-300"
                                 type="submit"
                                 value="Create"
                             />

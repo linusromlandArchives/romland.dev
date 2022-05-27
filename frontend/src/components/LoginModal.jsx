@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 //Local dependencies import
 import axios from '../axios';
-import { successNotify } from './';
+import { successNotify } from './Toast';
 
 export default () => {
     const [modalIsOpen, setModal] = useState(true);
@@ -82,23 +82,23 @@ export default () => {
                         <Form className="flex flex-col">
                             <label className="flex flex-col">
                                 Username
-                                <Field name="username" placeholder="Username" className="p-2 border border-gray-200 rounded-md" autoFocus />
+                                <Field name="username" placeholder="Username" className="rounded-md border border-gray-200 p-2" autoFocus />
                             </label>
-                            <ErrorMessage component="span" name="username" className="mb-4 italic text-red-500 text-md" />
+                            <ErrorMessage component="span" name="username" className="mb-4 italic text-red-500" />
                             <label className="flex flex-col">
                                 Password
                                 <Field
                                     name="password"
                                     type="password"
                                     placeholder="Password"
-                                    className="p-2 border border-gray-200 rounded-md"
+                                    className="rounded-md border border-gray-200 p-2"
                                 />
                             </label>
-                            <ErrorMessage component="span" name="password" className="mb-4 italic text-red-500 text-md" />
-                            <ErrorMessage component="span" name="login" className="mt-4 italic text-red-500 text-md" />
+                            <ErrorMessage component="span" name="password" className="mb-4 italic text-red-500" />
+                            <ErrorMessage component="span" name="login" className="mt-4 italic text-red-500" />
                             <input
                                 disabled={!dirty || !isValid}
-                                className="px-4 py-2 mt-4 font-bold text-white transition duration-150 bg-blue-500 rounded cursor-pointer hover:bg-blue-400 disabled:bg-blue-300 focus:outline-none focus:shadow-outline ease disabled:cursor-not-allowed"
+                                className="ease mt-4 cursor-pointer rounded bg-blue-500 py-2 px-4 font-bold text-white transition duration-150 hover:bg-blue-400 disabled:cursor-not-allowed disabled:bg-blue-300"
                                 type="submit"
                                 value="Login"
                             />

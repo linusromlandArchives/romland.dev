@@ -6,11 +6,11 @@ export default (props) => {
 
     return (
         <Link to={`/language/${languages.programmingLanguageID}`} className="mr-1">
-            <div className={`w-full rounded-md flex items-center h-6 ${altColor ? 'bg-gray-200' : 'bg-slate-400'}`}>
+            <div className={`flex h-6 w-full items-center rounded-md ${altColor ? 'bg-gray-200' : 'bg-slate-400'}`}>
                 <img
                     src={languages.programmingLanguageIcon}
                     alt={languages.programmingLanguageName + ' icon'}
-                    className="object-cover w-full h-4 mx-1"
+                    className="mx-1 h-4 w-full object-cover"
                 />
                 <h1 className={`mr-1 ${altColor ? 'text-black' : 'text-white'}`}>{languages.programmingLanguageName}</h1>
             </div>

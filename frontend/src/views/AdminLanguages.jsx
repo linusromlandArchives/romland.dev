@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 
 //Local dependencies import
 import axios from '../axios';
-import { successNotify, infoNotify, errorNotify } from '../components/';
+import { successNotify, infoNotify, errorNotify } from '../components/Toast';
 
 export default () => {
     //Initialize the react-router navigator
@@ -56,13 +56,13 @@ export default () => {
     }
 
     return (
-        <div className="flex justify-center w-full">
-            <section className="w-full p-8 mt-6 rounded-md md:w-1/2 bg-slate-200">
+        <div className="flex w-full justify-center">
+            <section className="mt-6 w-full rounded-md bg-slate-200 p-8 md:w-1/2">
                 <div className="flex items-center justify-between">
                     <h1 className="text-4xl font-semibold">Programming Languages</h1>
                     <Link
                         to="/admin/language/create"
-                        className="p-2 text-black transition duration-150 border rounded-md bg-slate-300 hover:bg-slate-200 border-slate-500 ease"
+                        className="ease rounded-md border border-slate-500 bg-slate-300 p-2 text-black transition duration-150 hover:bg-slate-200"
                     >
                         Create a new Language
                     </Link>
@@ -71,12 +71,12 @@ export default () => {
                     {data.map((language) => (
                         <li
                             key={language.programmingLanguageID}
-                            className="flex items-center justify-between p-4 my-4 border rounded-md bg-slate-300 border-slate-500"
+                            className="my-4 flex items-center justify-between rounded-md border border-slate-500 bg-slate-300 p-4"
                         >
                             <Link to={`/language/${language.programmingLanguageID}`}>
                                 <div className="flex items-center">
                                     <img
-                                        className="object-scale-down w-12 h-12 rounded-lg"
+                                        className="h-12 w-12 rounded-lg object-scale-down"
                                         src={language.programmingLanguageIcon}
                                         alt={language.name + ' Icon'}
                                     />
@@ -86,12 +86,12 @@ export default () => {
                             <div className="flex">
                                 <MdEdit
                                     size="45px"
-                                    className="p-2 m-1 rounded-md cursor-pointer hover:border border-slate-500"
+                                    className="m-1 cursor-pointer rounded-md border-slate-500 p-2 hover:border"
                                     onClick={() => navigate(`/admin/language/edit/${language.programmingLanguageID}`)}
                                 />
                                 <MdClose
                                     size="45px"
-                                    className="p-2 m-1 rounded-md cursor-pointer hover:border border-slate-500"
+                                    className="m-1 cursor-pointer rounded-md border-slate-500 p-2 hover:border"
                                     onClick={() => deleteLanguage(language.programmingLanguageID)}
                                 />
                             </div>
