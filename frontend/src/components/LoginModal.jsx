@@ -12,15 +12,14 @@ export default () => {
     const [modalIsOpen, setModal] = useState(true);
 
     useEffect(() => {
-        async function fetchData() {
+        (async function () {
             // You can await here
             const request = await axios.get('/api/auth');
             const data = await request.data;
             if (data.success) {
                 setModal(false);
             }
-        }
-        fetchData();
+        })();
     }, [modalIsOpen]);
 
     return (

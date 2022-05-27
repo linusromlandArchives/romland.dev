@@ -10,7 +10,7 @@ export default () => {
             <LoginModal />
             <nav className="bg-white w-full h-14 border-slate-300 border-b flex items-center justify-center md:justify-between">
                 <Link to="/">
-                    <h1 className="text-2xl font-semibold p-2 hidden md:block">Romland.dev Admin</h1>
+                    <h1 className="text-2xl font-semibold p-2 hidden md:block">Admin</h1>
                 </Link>
                 <ul className="flex w-full md:w-fit justify-around">
                     <li>
