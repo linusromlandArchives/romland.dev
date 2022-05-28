@@ -104,18 +104,18 @@ export default () => {
     }
 
     return (
-        <div className="w-full flex justify-center">
-            <div className="w-full lg:w-8/12 rounded-md bg-slate-200 p-8 mt-6">
-                <div className="flex justify-between items-center mb-4">
+        <div className="flex w-full justify-center">
+            <div className="mt-6 w-full rounded-md bg-slate-200 p-8 lg:w-8/12">
+                <div className="mb-4 flex items-center justify-between">
                     <h1 className="text-4xl font-semibold">Edit a project</h1>
                     <Link
                         to="/admin/project"
-                        className="text-black bg-slate-300 hover:bg-slate-200 border-slate-500 border rounded-md p-2 transition duration-150 ease"
+                        className="ease rounded-md border border-slate-500 bg-slate-300 p-2 text-black transition duration-150 hover:bg-slate-200"
                     >
                         Back to admin
                     </Link>
                 </div>
-                <div className="flex justify-center flex-col md:flex-row">
+                <div className="flex flex-col justify-center md:flex-row">
                     <Formik
                         enableReinitialize={true}
                         initialValues={{
@@ -188,18 +188,18 @@ export default () => {
                         }}
                     >
                         {({ values, setFieldValue, isValid }) => (
-                            <Form className="flex flex-col w-full lg:w-1/2 mr-0 md:mr-6 mt-4 md:mt-0">
+                            <Form className="mt-4 mr-0 flex w-full flex-col md:mt-0 md:mr-6 lg:w-1/2">
                                 <label className="flex flex-col">
                                     Project name
                                     <Field
                                         name="projectName"
                                         placeholder="Project name"
                                         autoComplete="off"
-                                        className="border border-gray-200 p-2 rounded-md"
+                                        className="rounded-md border border-gray-200 p-2"
                                         autoFocus
                                     />
                                 </label>
-                                <ErrorMessage component="span" name="projectName" className="text-red-500 text-sm mb-2 italic" />
+                                <ErrorMessage component="span" name="projectName" className="mb-2 text-sm italic text-red-500" />
                                 <label className="flex flex-col">
                                     Project description
                                     <Field
@@ -207,10 +207,10 @@ export default () => {
                                         placeholder="Project description"
                                         autoComplete="off"
                                         as="textarea"
-                                        className="border border-gray-200 p-2 rounded-md"
+                                        className="rounded-md border border-gray-200 p-2"
                                     />
                                 </label>
-                                <ErrorMessage component="span" name="projectDescription" className="text-red-500 text-sm mb-2 italic" />
+                                <ErrorMessage component="span" name="projectDescription" className="mb-2 text-sm italic text-red-500" />
                                 <label className="flex flex-col">
                                     <p>
                                         Project Source Code URL <span className="text-sm">(ex. to the project&#39;s Git repository)</span>
@@ -219,20 +219,20 @@ export default () => {
                                         name="projectSourceCodeURL"
                                         placeholder="Project Source Code URL"
                                         autoComplete="off"
-                                        className="border border-gray-200 p-2 rounded-md"
+                                        className="rounded-md border border-gray-200 p-2"
                                     />
                                 </label>
-                                <ErrorMessage component="span" name="projectSourceCodeURL" className="text-red-500 text-sm mb-2 italic" />
+                                <ErrorMessage component="span" name="projectSourceCodeURL" className="mb-2 text-sm italic text-red-500" />
                                 <label className="flex flex-col">
                                     Project URL (ex. to demo)
                                     <Field
                                         name="projectURL"
                                         placeholder="Project URL"
                                         autoComplete="off"
-                                        className="border border-gray-200 p-2 rounded-md"
+                                        className="rounded-md border border-gray-200 p-2"
                                     />
                                 </label>
-                                <ErrorMessage component="span" name="projectURL" className="text-red-500 text-sm mb-2 italic" />
+                                <ErrorMessage component="span" name="projectURL" className="mb-2 text-sm italic text-red-500" />
 
                                 <label className="flex flex-col">
                                     <p>
@@ -249,7 +249,7 @@ export default () => {
                                         name="languageIDs"
                                     />
                                 </label>
-                                <ErrorMessage component="span" name="languageError" className="text-red-500 text-sm mb-2 italic" />
+                                <ErrorMessage component="span" name="languageError" className="mb-2 text-sm italic text-red-500" />
 
                                 <div className="flex">
                                     <label className="flex items-center">
@@ -257,32 +257,32 @@ export default () => {
                                         <Field
                                             name="projectVisible"
                                             type="checkbox"
-                                            className="ml-2 border border-gray-200 p-2 rounded-md"
+                                            className="ml-2 rounded-md border border-gray-200 p-2"
                                         />
                                     </label>
-                                    <label className="flex items-center ml-6">
+                                    <label className="ml-6 flex items-center">
                                         <p>Featured</p>
                                         <Field
                                             name="projectFeatured"
                                             type="checkbox"
-                                            className="ml-2 border border-gray-200 p-2 rounded-md"
+                                            className="ml-2 rounded-md border border-gray-200 p-2"
                                         />
                                     </label>
                                 </div>
 
-                                <ErrorMessage component="span" name="created" className="text-red-500 text-md mt-4 italic" />
+                                <ErrorMessage component="span" name="created" className="mt-4 italic text-red-500" />
                                 <input
                                     disabled={!isValid}
-                                    className="bg-blue-500 hover:bg-blue-400 disabled:bg-blue-300 mt-4 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition ease duration-150 cursor-pointer disabled:cursor-not-allowed"
+                                    className="ease mt-4 cursor-pointer rounded bg-blue-500 py-2 px-4 font-bold text-white transition duration-150 hover:bg-blue-400 focus:outline-none disabled:cursor-not-allowed disabled:bg-blue-300"
                                     type="submit"
                                     value="Save"
                                 />
                             </Form>
                         )}
                     </Formik>
-                    <div className="w-full lg:w-1/2 ml-0 md:ml-6">
+                    <div className="ml-0 w-full md:ml-6 lg:w-1/2">
                         <button
-                            className="bg-blue-500 hover:bg-blue-400 disabled:bg-blue-300 m-2 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition ease duration-150 cursor-pointer disabled:cursor-not-allowed"
+                            className="ease m-2 cursor-pointer rounded bg-blue-500 py-2 px-4 font-bold text-white transition duration-150 hover:bg-blue-400 focus:outline-none disabled:cursor-not-allowed disabled:bg-blue-300"
                             onClick={() => {
                                 uploadInput.current.click();
                             }}
@@ -291,19 +291,19 @@ export default () => {
                         </button>
                         <input type="file" accept="image/*" className="hidden" ref={uploadInput} />
 
-                        <div className="flex flex-wrap overflow-y-none md:overflow-y-scroll max-h-max md:max-h-96">
+                        <div className="flex max-h-max flex-wrap overflow-y-auto md:max-h-96 md:overflow-y-scroll">
                             {project &&
                                 project.projectImages &&
                                 project.projectImages.length > 0 &&
                                 project.projectImages.map((image, index) => (
-                                    <div key={index} className="w-5/12 m-2 flex flex-col items-center bg-slate-300 rounded-md p-2">
+                                    <div key={index} className="m-2 flex w-5/12 flex-col items-center rounded-md bg-slate-300 p-2">
                                         <img
                                             src={'/api/projectImage/' + image.projectImagesID}
                                             alt={image.projectImagesFileName}
                                             className="h-28 rounded-md"
                                         />
                                         <button
-                                            className="bg-red-500 hover:bg-red-400 disabled:bg-red-300 m-2 text-white font-semibold p-1 rounded focus:outline-none focus:shadow-outline transition ease duration-150 cursor-pointer disabled:cursor-not-allowed flex items-center w-full justify-center"
+                                            className="ease m-2 flex w-full cursor-pointer items-center justify-center rounded bg-red-500 p-1 font-semibold text-white transition duration-150 hover:bg-red-400 focus:outline-none disabled:cursor-not-allowed disabled:bg-red-300"
                                             onClick={() => {
                                                 deleteProjectImage(image.projectImagesID);
                                             }}

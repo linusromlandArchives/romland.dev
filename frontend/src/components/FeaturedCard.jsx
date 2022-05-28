@@ -22,12 +22,12 @@ export default (props) => {
 
     return (
         <div
-            className="w-full h-full bg-gray-200 hover:bg-gray-50 transition ease duration-150 rounded-md flex flex-col items-center p-4 cursor-pointer"
+            className="ease flex h-full w-full cursor-pointer flex-col items-center rounded-md bg-gray-200 p-4 transition duration-150 hover:bg-gray-50"
             onClick={navigateToProject}
         >
-            <img src={image} alt={project.projectName} className="w-full h-32 object-cover" />
-            <h2 className="text-2xl text-black mb-2">{project.projectName}</h2>
-            <p className="text-md text-gray-600 overflow-y-scroll hide-scroll">{project.projectDescription}</p>
+            <img src={image} alt={project.projectName} className="h-32 w-full object-cover" />
+            <h2 className="mb-2 text-2xl text-black">{project.projectName}</h2>
+            <p className="hide-scroll overflow-y-scroll text-gray-600">{project.projectDescription}</p>
         </div>
     );
 };

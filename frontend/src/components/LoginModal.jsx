@@ -12,15 +12,14 @@ export default () => {
     const [modalIsOpen, setModal] = useState(true);
 
     useEffect(() => {
-        async function fetchData() {
+        (async function () {
             // You can await here
             const request = await axios.get('/api/auth');
             const data = await request.data;
             if (data.success) {
                 setModal(false);
             }
-        }
-        fetchData();
+        })();
     }, [modalIsOpen]);
 
     return (
@@ -46,7 +45,7 @@ export default () => {
                 }}
             >
                 <div className="mb-4">
-                    <Link to="/" className="hover:underline mb-4 ">
+                    <Link to="/" className="mb-4 hover:underline ">
                         Go back
                     </Link>
                     <h1 className="text-3xl font-semibold">Access limited</h1>
@@ -83,23 +82,23 @@ export default () => {
                         <Form className="flex flex-col">
                             <label className="flex flex-col">
                                 Username
-                                <Field name="username" placeholder="Username" className="border border-gray-200 p-2 rounded-md" autoFocus />
+                                <Field name="username" placeholder="Username" className="rounded-md border border-gray-200 p-2" autoFocus />
                             </label>
-                            <ErrorMessage component="span" name="username" className="text-red-500 text-md mb-4 italic" />
+                            <ErrorMessage component="span" name="username" className="mb-4 italic text-red-500" />
                             <label className="flex flex-col">
                                 Password
                                 <Field
                                     name="password"
                                     type="password"
                                     placeholder="Password"
-                                    className="border border-gray-200 p-2 rounded-md"
+                                    className="rounded-md border border-gray-200 p-2"
                                 />
                             </label>
-                            <ErrorMessage component="span" name="password" className="text-red-500 text-md mb-4 italic" />
-                            <ErrorMessage component="span" name="login" className="text-red-500 text-md mt-4 italic" />
+                            <ErrorMessage component="span" name="password" className="mb-4 italic text-red-500" />
+                            <ErrorMessage component="span" name="login" className="mt-4 italic text-red-500" />
                             <input
                                 disabled={!dirty || !isValid}
-                                className="bg-blue-500 hover:bg-blue-400 disabled:bg-blue-300 mt-4 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition ease duration-150 cursor-pointer disabled:cursor-not-allowed"
+                                className="ease mt-4 cursor-pointer rounded bg-blue-500 py-2 px-4 font-bold text-white transition duration-150 hover:bg-blue-400 disabled:cursor-not-allowed disabled:bg-blue-300"
                                 type="submit"
                                 value="Login"
                             />

@@ -5,7 +5,7 @@ export default function (props) {
     const { children } = props;
 
     return (
-        <div className="bg-cyan-900 min-h-screen w-screen">
+        <div className="min-h-screen w-screen bg-cyan-900">
             <AdminNavbar />
             {children}
         </div>

@@ -11,13 +11,13 @@ export default () => {
     const navigate = useNavigate();
 
     return (
-        <div className="w-full flex justify-center">
-            <div className="w-full md:w-1/2 rounded-md bg-slate-200 p-8 mt-6">
-                <div className="flex justify-between items-center mb-4">
+        <div className="flex w-full justify-center">
+            <div className="mt-6 w-full rounded-md bg-slate-200 p-8 md:w-1/2">
+                <div className="mb-4 flex items-center justify-between">
                     <h1 className="text-4xl font-semibold">Create programming language</h1>
                     <Link
                         to="/admin/language"
-                        className="text-black bg-slate-300 hover:bg-slate-200 border-slate-500 border rounded-md p-2 transition duration-150 ease"
+                        className="ease rounded-md border border-slate-500 bg-slate-300 p-2 text-black transition duration-150 hover:bg-slate-200"
                     >
                         Back to admin
                     </Link>
@@ -87,11 +87,11 @@ export default () => {
                                     name="programmingLanguageName"
                                     placeholder="Programming Language Name"
                                     autoComplete="off"
-                                    className="border border-gray-200 p-2 rounded-md"
+                                    className="rounded-md border border-gray-200 p-2"
                                     autoFocus
                                 />
                             </label>
-                            <ErrorMessage component="span" name="programmingLanguageName" className="text-red-500 text-sm mb-2 italic" />
+                            <ErrorMessage component="span" name="programmingLanguageName" className="mb-2 text-sm italic text-red-500" />
                             <label className="flex flex-col">
                                 Programming language description
                                 <Field
@@ -99,13 +99,13 @@ export default () => {
                                     placeholder="Programming language description"
                                     autoComplete="off"
                                     as="textarea"
-                                    className="border border-gray-200 p-2 rounded-md"
+                                    className="rounded-md border border-gray-200 p-2"
                                 />
                             </label>
                             <ErrorMessage
                                 component="span"
                                 name="programmingLanguageDescription"
-                                className="text-red-500 text-sm mb-2 italic"
+                                className="mb-2 text-sm italic text-red-500"
                             />
                             <label className="flex flex-col">
                                 <p>
@@ -115,25 +115,25 @@ export default () => {
                                     name="programmingLanguageIcon"
                                     placeholder="Programming Language Icon"
                                     autoComplete="off"
-                                    className="border border-gray-200 p-2 rounded-md"
+                                    className="rounded-md border border-gray-200 p-2"
                                 />
                             </label>
-                            <ErrorMessage component="span" name="programmingLanguageIcon" className="text-red-500 text-sm mb-2 italic" />
+                            <ErrorMessage component="span" name="programmingLanguageIcon" className="mb-2 text-sm italic text-red-500" />
                             <label className="flex flex-col">
                                 Programming language URL
                                 <Field
                                     name="programmingLanguageURL"
                                     placeholder="Programming language URL"
                                     autoComplete="off"
-                                    className="border border-gray-200 p-2 rounded-md"
+                                    className="rounded-md border border-gray-200 p-2"
                                 />
                             </label>
-                            <ErrorMessage component="span" name="programmingLanguageURL" className="text-red-500 text-sm mb-2 italic" />
+                            <ErrorMessage component="span" name="programmingLanguageURL" className="mb-2 text-sm italic text-red-500" />
 
-                            <ErrorMessage component="span" name="created" className="text-red-500 text-md mt-4 italic" />
+                            <ErrorMessage component="span" name="created" className="mt-4 italic text-red-500" />
                             <input
                                 disabled={!dirty || !isValid}
-                                className="bg-blue-500 hover:bg-blue-400 disabled:bg-blue-300 mt-4 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition ease duration-150 cursor-pointer disabled:cursor-not-allowed"
+                                className="ease mt-4 cursor-pointer rounded bg-blue-500 py-2 px-4 font-bold text-white transition duration-150 hover:bg-blue-400 focus:outline-none disabled:cursor-not-allowed disabled:bg-blue-300"
                                 type="submit"
                                 value="Create"
                             />
