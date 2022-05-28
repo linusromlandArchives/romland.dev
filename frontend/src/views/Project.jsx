@@ -40,15 +40,17 @@ export default () => {
     }, []);
 
     return (
-        <div className="flex min-h-screen w-screen flex-col items-center bg-cyan-900">
-            <div className="m-0 flex min-h-screen w-full flex-col rounded-none bg-transparent py-4 px-6 pt-1 md:m-6 md:min-h-fit md:w-8/12 md:rounded-md md:bg-slate-400">
-                <ImageGallery
-                    items={images}
-                    showNav={false}
-                    showFullscreenButton={false}
-                    showPlayButton={false}
-                    showThumbnails={project.projectImages && project.projectImages.length == 0 ? false : true}
-                />
+        <div className="flex min-h-screen flex-col items-center justify-start bg-cyan-900 md:justify-center">
+            <div className="m-0 flex w-full flex-col rounded-none bg-transparent py-4 px-6 md:min-h-fit md:w-7/12 md:rounded-md md:bg-slate-400">
+                <div className="h-1/4">
+                    <ImageGallery
+                        items={images}
+                        showNav={false}
+                        showFullscreenButton={false}
+                        showPlayButton={false}
+                        showThumbnails={project.projectImages && project.projectImages.length > 1 ? false : true}
+                    />
+                </div>
                 <div className="ml-2 flex flex-col justify-end text-white md:text-black">
                     <h3 className="text-3xl font-semibold ">{project.projectName}</h3>
                     <p title={project.projectDescription}>{project.projectDescription}</p>
