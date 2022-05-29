@@ -1,11 +1,12 @@
 //External dependencies import
 import { useSearchParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 //Internal dependencies import
 import axios from '../axios';
 import SearchResult from '../components/SearchResult';
 import Navbar from '../components/Navbar';
+import { projectName } from '../contexts';
 
 export default function () {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -13,6 +14,8 @@ export default function () {
     const [query, setQuery] = useState(searchParams.get('query'));
 
     const [searchResults, setSearchResults] = useState([]);
+
+    const projName = useContext(projectName);
 
     function handleSearch(event) {
         event.preventDefault();
@@ -35,6 +38,7 @@ export default function () {
 
     useEffect(() => {
         search();
+        document.title = `Search - ${projName}`;
     }, []);
 
     return (

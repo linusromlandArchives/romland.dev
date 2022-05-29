@@ -1,14 +1,16 @@
 //External dependencies import
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
 
 //Local dependencies import
 import LanguageTag from '../components/LanguageTag';
+import { projectName } from '../contexts';
 
 export default () => {
     const { projectID } = useParams();
+    const projName = useContext(projectName);
 
     const [project, setProject] = useState({});
     const [images, setImages] = useState([]);
@@ -37,6 +39,7 @@ export default () => {
 
     useEffect(() => {
         getProject();
+        document.title = `Project - ${projName}`;
     }, []);
 
     return (

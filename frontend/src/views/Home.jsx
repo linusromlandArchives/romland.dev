@@ -1,18 +1,22 @@
 //External dependencies import
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useNavigate, createSearchParams } from 'react-router-dom';
 
 //Local dependencies import
 import axios from '../axios';
 import FeaturedCard from '../components/FeaturedCard';
 import { errorNotify } from '../components/Toast';
+import { projectName } from '../contexts';
+
 export default function () {
     const navigate = useNavigate();
     const [data, setData] = useState([]);
     const [search, setSearch] = useState('');
+    const projName = useContext(projectName);
 
     useEffect(() => {
         getData();
+        document.title = projName;
     }, []);
 
     async function getData() {
