@@ -1,8 +1,12 @@
 //External Dependencies Import
 import inquirer from 'inquirer';
 import { Logger } from 'tslog';
+import * as dotenv from 'dotenv';
 
-//Local Dependencies Import
+//Configuring dotenv
+dotenv.config();
+
+//Internal Dependencies Import
 import { sequelize, createDatabase } from './config/connection';
 import establishRelations from './config/relations';
 
