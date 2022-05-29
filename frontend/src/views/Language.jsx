@@ -1,16 +1,19 @@
 //External dependencies import
 import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 //Internal dependencies import
 import axios from '../axios';
 import SearchResult from '../components/SearchResult';
 import Navbar from '../components/Navbar';
+import { projectName } from '../contexts';
 
 export default function () {
     const { languageID } = useParams();
 
     const [query, setQuery] = useState('');
+
+    const projName = useContext(projectName);
 
     const [searchResults, setSearchResults] = useState([]);
     const [language, setLanguage] = useState([]);
@@ -27,7 +30,6 @@ export default function () {
             },
         });
         const response = await request.data;
-        console.log(response);
         setLanguage(response.data[0]);
     }
 
@@ -46,6 +48,7 @@ export default function () {
     useEffect(() => {
         search();
         getLanguage();
+        document.title = `Language - ${projName}`;
     }, []);
 
     return (
