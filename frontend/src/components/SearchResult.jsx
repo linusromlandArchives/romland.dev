@@ -21,13 +21,13 @@ export default (props) => {
     return (
         <Link to={`/project/${project.projectID}`}>
             <div className="ease my-2 flex w-full items-center rounded-md bg-slate-200 p-2 transition duration-150 hover:bg-slate-100">
-                <img src={image} alt={project.projectName} className="h-28 w-44 object-cover" />
-                <div className="ml-4 flex h-28 flex-col justify-between">
+                <img src={image} alt={project.projectName} className="h-24 w-36 object-cover md:h-28 md:w-44" />
+                <div className="ml-1 flex h-28 flex-col justify-between">
                     <div>
-                        <h1 className="h-8 text-2xl font-semibold" title={project.projectName}>
+                        <h1 className="h-8 truncate text-xl font-semibold md:text-2xl" title={project.projectName}>
                             {project.projectName}
                         </h1>
-                        <p className="h-12 overflow-hidden text-base" title={project.projectDescription}>
+                        <p className="h-12 overflow-hidden text-ellipsis text-base" title={project.projectDescription}>
                             {project.projectDescription}
                         </p>
                     </div>

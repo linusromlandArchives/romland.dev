@@ -10,9 +10,9 @@ export default (props) => {
                 <img
                     src={languages.programmingLanguageIcon}
                     alt={languages.programmingLanguageName + ' icon'}
-                    className="mx-1 h-4 w-full object-cover"
+                    className="mx-1 h-4 w-4 object-cover"
                 />
-                <h1 className={`mr-1 ${altColor ? 'text-black' : 'text-white'}`}>{languages.programmingLanguageName}</h1>
+                <h1 className={`mr-1 ${altColor ? 'text-black' : 'hidden text-white md:block'}`}>{languages.programmingLanguageName}</h1>
             </div>
         </Link>
     );
