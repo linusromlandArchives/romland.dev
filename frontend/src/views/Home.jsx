@@ -80,7 +80,13 @@ export default function () {
                 </form>
                 <div className="mt-2 flex flex-wrap justify-center">
                     {data.map((project) => (
-                        <div className="h-96 w-full p-4 lg:w-1/3" key={project.projectID}>
+                        <div
+                            className="w-full p-4 lg:w-1/3"
+                            style={{
+                                maxHeight: '30rem',
+                            }}
+                            key={project.projectID}
+                        >
                             <FeaturedCard project={project} />
                         </div>
                     ))}

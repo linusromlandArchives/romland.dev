@@ -25,7 +25,7 @@ export default (props) => {
             className="ease flex h-full w-full cursor-pointer flex-col items-center rounded-md bg-gray-200 p-4 transition duration-150 hover:bg-gray-50"
             onClick={navigateToProject}
         >
-            <img src={image} alt={project.projectName} className="h-32 w-full object-cover" />
+            <img src={image} alt={project.projectName} className="aspect-video w-full" />
             <h2 className="mb-2 text-2xl text-black">{project.projectName}</h2>
             <p className="hide-scroll overflow-y-scroll text-gray-600">{project.projectDescription}</p>
         </div>

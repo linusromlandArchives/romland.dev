@@ -51,7 +51,7 @@ export default () => {
                         showNav={false}
                         showFullscreenButton={false}
                         showPlayButton={false}
-                        showThumbnails={project.projectImages && project.projectImages.length > 1 ? false : true}
+                        showThumbnails={project.projectImages && project.projectImages.length > 1 ? true : false}
                     />
                 </div>
                 <div className="ml-2 flex flex-col justify-end text-white md:text-black">

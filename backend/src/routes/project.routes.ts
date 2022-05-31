@@ -1,6 +1,6 @@
 //External Dependencies Import
 import { Request, Response, Router } from 'express';
-import { Op } from 'sequelize';
+import { Op, Sequelize } from 'sequelize';
 
 //Local Dependencies Import
 import { project, projectImages, programmingLanguage } from '../models';
@@ -21,7 +21,7 @@ router.get('/', async (req: Request, res: Response) => {
     const featured = req.query.featured as string;
 
     const conditions = {} as any;
-    const associationsConditions = [];
+    const order = [] as any;
 
     if (ids) {
         conditions.projectID = { [Op.in]: ids.split(',') };
@@ -37,27 +37,40 @@ router.get('/', async (req: Request, res: Response) => {
 
     if (featured) {
         conditions.projectFeatured = featured == 'true' ? true : false;
-    }
-
-    if (languageIDs) {
-        associationsConditions.push({
-            model: programmingLanguage,
-            where: {
-                programmingLanguageID: languageIDs,
-            },
-        });
+        //Order by random
+        order.push([Sequelize.fn('RAND')]);
     }
 
     try {
-        const projects = await project.findAll({
+        const projects = (await project.findAll({
             where: conditions,
-            include: [projectImages, programmingLanguage, ...associationsConditions],
+            include: [projectImages, programmingLanguage],
+            order: featured ? order : undefined,
             limit: limit ? parseInt(limit) : undefined,
-        });
+        })) as any;
+
+        const filteredProjects = languageIDs ? [] : projects;
+
+        if (languageIDs) {
+            const languageIDsArray = languageIDs.split(',');
+
+            for (const project of projects) {
+                const projectLanguages = project.programmingLanguages;
+
+                for (const language of projectLanguages) {
+                    if (languageIDsArray.includes(language.programmingLanguageID.toString())) {
+                        filteredProjects.push(project);
+                        break;
+                    }
+                }
+            }
+        }
+
         res.json({
             success: true,
             error: '',
-            data: projects,
+            //Filter by language
+            data: filteredProjects,
         });
     } catch (error) {
         res.status(500).json({
