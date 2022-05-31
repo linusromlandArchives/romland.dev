@@ -21,7 +21,6 @@ router.get('/', async (req: Request, res: Response) => {
     const featured = req.query.featured as string;
 
     const conditions = {} as any;
-    const associationsConditions = [];
 
     if (ids) {
         conditions.projectID = { [Op.in]: ids.split(',') };
@@ -39,25 +38,35 @@ router.get('/', async (req: Request, res: Response) => {
         conditions.projectFeatured = featured == 'true' ? true : false;
     }
 
-    if (languageIDs) {
-        associationsConditions.push({
-            model: programmingLanguage,
-            where: {
-                programmingLanguageID: languageIDs,
-            },
-        });
-    }
-
     try {
-        const projects = await project.findAll({
+        const projects = (await project.findAll({
             where: conditions,
-            include: [projectImages, programmingLanguage, ...associationsConditions],
+            include: [projectImages, programmingLanguage],
             limit: limit ? parseInt(limit) : undefined,
-        });
+        })) as any;
+
+        const filteredProjects = languageIDs ? [] : projects;
+
+        if (languageIDs) {
+            const languageIDsArray = languageIDs.split(',');
+
+            for (const project of projects) {
+                const projectLanguages = project.programmingLanguages;
+
+                for (const language of projectLanguages) {
+                    if (languageIDsArray.includes(language.programmingLanguageID.toString())) {
+                        filteredProjects.push(project);
+                        break;
+                    }
+                }
+            }
+        }
+
         res.json({
             success: true,
             error: '',
-            data: projects,
+            //Filter by language
+            data: filteredProjects,
         });
     } catch (error) {
         res.status(500).json({
