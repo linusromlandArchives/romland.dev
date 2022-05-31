@@ -46,7 +46,7 @@ export default function () {
     }
 
     return (
-        <div className="flex min-h-screen w-screen flex-col items-center justify-center bg-cyan-900">
+        <div className="flex min-h-screen w-full flex-col items-center justify-center bg-cyan-900">
             <div className="flex w-10/12 flex-col items-center lg:w-7/12">
                 <h1 className="mt-4 text-5xl font-semibold text-white sm:text-6xl">Romland.dev</h1>
 

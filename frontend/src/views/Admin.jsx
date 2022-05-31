@@ -14,7 +14,7 @@ export default function (props) {
     }, [projName]);
 
     return (
-        <div className="min-h-screen w-screen bg-cyan-900">
+        <div className="min-h-screen w-full bg-cyan-900">
             <AdminNavbar />
             {children}
         </div>
