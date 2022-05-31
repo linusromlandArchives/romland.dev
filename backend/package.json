@@ -34,6 +34,7 @@
         "@types/ip": "^1.1.0",
         "@types/passport": "^1.0.7",
         "@types/passport-local": "^1.0.34",
+        "@types/sharp": "^0.30.2",
         "@typescript-eslint/eslint-plugin": "^5.12.1",
         "@typescript-eslint/parser": "^5.12.1",
         "eslint": "^8.9.0",
@@ -57,6 +58,7 @@
         "passport": "^0.5.3",
         "passport-local": "^1.0.0",
         "sequelize": "^6.19.0",
+        "sharp": "^0.30.6",
         "ts-node": "^10.5.0",
         "tsc": "^2.0.4",
         "tslog": "^3.3.3"

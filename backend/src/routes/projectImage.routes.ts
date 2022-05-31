@@ -2,6 +2,7 @@
 import { Request, Response, Router } from 'express';
 import fs from 'fs';
 import path from 'path';
+import sharp from 'sharp';
 
 //Local Dependencies Import
 import { project, projectImages } from '../models';
@@ -104,10 +105,21 @@ router.post('/:projectID', checkAdmin, async (req: Request, res: Response) => {
         });
     }
 
-    //Move file to uploads folder
+    //Resize image to 1920x1080
     const fileName = `${Date.now()}-${file.name}`;
     const filePath = `${__dirname}/../public/uploadedImages/${fileName}`;
-    file.mv(filePath);
+
+    const sharpImage = sharp(file.data);
+    const processedImage = await sharpImage
+        .resize(1920, 1080, {
+            fit: 'contain',
+        })
+        .toFormat('png');
+    processedImage.toFile(filePath, (err: any) => {
+        if (err) {
+            console.error(err);
+        }
+    });
 
     try {
         const createdProjectImage = await projectImages.create({
