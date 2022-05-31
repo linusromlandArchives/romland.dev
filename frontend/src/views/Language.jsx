@@ -52,7 +52,7 @@ export default function () {
     }, []);
 
     return (
-        <div className="min-h-screen w-screen bg-cyan-900">
+        <div className="min-h-screen w-full bg-cyan-900">
             <Navbar />
             <div className="mt-4 flex w-full flex-col items-center">
                 <div className="flex w-full flex-col rounded-none bg-transparent py-4 px-6 pt-1 md:w-8/12 md:rounded-md md:bg-slate-400">
