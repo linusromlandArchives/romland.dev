@@ -44,7 +44,16 @@ router.get('/', async (req: Request, res: Response) => {
     try {
         const projects = (await project.findAll({
             where: conditions,
-            include: [projectImages, programmingLanguage],
+            include: [
+                {
+                    model: projectImages,
+                    order: [['createdAt', 'DESC']],
+                },
+                {
+                    model: programmingLanguage,
+                    order: [['programmingLanguageName', 'DESC']],
+                },
+            ],
             order: featured ? order : undefined,
             limit: limit ? parseInt(limit) : undefined,
         })) as any;
