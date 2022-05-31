@@ -98,7 +98,7 @@ router.post('/:projectID', checkAdmin, async (req: Request, res: Response) => {
     }
 
     //If file is too large, return error
-    if (file.size > 1000000) {
+    if (file.size > 10000000) {
         return res.status(400).json({
             success: false,
             error: 'File is too large',
