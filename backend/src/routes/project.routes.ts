@@ -44,19 +44,19 @@ router.get('/', async (req: Request, res: Response) => {
     try {
         const projects = (await project.findAll({
             where: conditions,
-            include: [
-                {
-                    model: projectImages,
-                    order: [['createdAt', 'DESC']],
-                },
-                {
-                    model: programmingLanguage,
-                    order: [['programmingLanguageName', 'DESC']],
-                },
-            ],
-            order: featured ? order : undefined,
+            include: [projectImages, programmingLanguage],
             limit: limit ? parseInt(limit) : undefined,
         })) as any;
+
+        //Sort images by date
+        projects.forEach((project: any) => {
+            project.projectImages = project.projectImages.sort((a: any, b: any) => {
+                return a.createdAt > b.createdAt ? 1 : -1;
+            });
+            project.programmingLanguages = project.programmingLanguages.sort((a: any, b: any) => {
+                return a.languageName > b.languageName ? 1 : -1;
+            });
+        });
 
         const filteredProjects = languageIDs ? [] : projects;
 
