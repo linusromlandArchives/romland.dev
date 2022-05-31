@@ -37,6 +37,12 @@ export default function () {
 
     function navigateToSearch(event) {
         event.preventDefault();
+
+        if (search.length <= 0) {
+            navigate('/search');
+            return;
+        }
+
         navigate({
             pathname: '/search',
             search: createSearchParams({
@@ -50,8 +56,8 @@ export default function () {
             <div className="flex w-10/12 flex-col items-center lg:w-7/12">
                 <h1 className="mt-4 text-5xl font-semibold text-white sm:text-6xl">Romland.dev</h1>
 
-                <form className="mt-4 w-full p-2 md:w-8/12" onSubmit={navigateToSearch}>
-                    <div className="relative text-gray-600 ">
+                <form className="mt-4 flex w-full flex-col items-center p-2 md:w-8/12" onSubmit={navigateToSearch}>
+                    <div className="relative w-full text-gray-600">
                         <span className="absolute inset-y-0 left-0 flex items-center pl-2">
                             <button type="submit" className="p-1 focus:outline-none">
                                 <svg
@@ -77,6 +83,12 @@ export default function () {
                             onChange={(event) => setSearch(event.target.value)}
                         />
                     </div>
+                    <button
+                        type="submit"
+                        className="ease my-2 w-2/3 rounded-md bg-gray-200 p-2 transition duration-150 hover:bg-gray-300 md:w-1/3"
+                    >
+                        {search.length <= 0 ? 'See projects!' : 'Search'}
+                    </button>
                 </form>
                 <div className="mt-2 flex flex-wrap justify-center">
                     {data.map((project) => (
