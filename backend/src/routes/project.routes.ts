@@ -1,6 +1,6 @@
 //External Dependencies Import
 import { Request, Response, Router } from 'express';
-import { Op } from 'sequelize';
+import { Op, Sequelize } from 'sequelize';
 
 //Local Dependencies Import
 import { project, projectImages, programmingLanguage } from '../models';
@@ -21,6 +21,7 @@ router.get('/', async (req: Request, res: Response) => {
     const featured = req.query.featured as string;
 
     const conditions = {} as any;
+    const order = [] as any;
 
     if (ids) {
         conditions.projectID = { [Op.in]: ids.split(',') };
@@ -36,12 +37,15 @@ router.get('/', async (req: Request, res: Response) => {
 
     if (featured) {
         conditions.projectFeatured = featured == 'true' ? true : false;
+        //Order by random
+        order.push([Sequelize.fn('RAND')]);
     }
 
     try {
         const projects = (await project.findAll({
             where: conditions,
             include: [projectImages, programmingLanguage],
+            order: featured ? order : undefined,
             limit: limit ? parseInt(limit) : undefined,
         })) as any;
 
