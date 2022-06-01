@@ -113,6 +113,7 @@ router.post('/:projectID', checkAdmin, async (req: Request, res: Response) => {
     const processedImage = await sharpImage
         .resize(1920, 1080, {
             fit: 'contain',
+            background: { r: 0, g: 0, b: 0, alpha: 0 },
         })
         .toFormat('png');
     processedImage.toFile(filePath, (err: any) => {
