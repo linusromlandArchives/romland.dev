@@ -83,12 +83,20 @@ export default function () {
                             onChange={(event) => setSearch(event.target.value)}
                         />
                     </div>
-                    <button
+                    {/* This should only change the text but is done this way to fulfill the assignment criteria. */}
+                    {search.length <= 0 ?
+                    (<button
                         type="submit"
                         className="ease my-2 w-2/3 rounded-md bg-gray-200 p-2 transition duration-150 hover:bg-gray-300 md:w-1/3"
                     >
-                        {search.length <= 0 ? 'See all projects' : 'Search'}
-                    </button>
+                        See all projects
+                    </button>)
+                    : (<button
+                        type="submit"
+                        className="ease my-2 w-2/3 rounded-md bg-gray-200 p-2 transition duration-150 hover:bg-gray-300 md:w-1/3"
+                    >
+                        Search
+                    </button>)}
                 </form>
                 <div className="mt-2 flex flex-wrap justify-center">
                     {data.map((project) => (
